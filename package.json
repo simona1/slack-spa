@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "flow": "0.2.3",
+    "react": "15.6.1",
+    "react-dom": "15.6.1"
   },
   "devDependencies": {
     "eslint": "4.3.0",
@@ -15,11 +16,12 @@
     "react-scripts": "1.0.10"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "node_modules/eslint/bin/eslint.js --ext=js --ext=jsx ."
+    "flow": "flow",
+    "lint": "node_modules/eslint/bin/eslint.js --ext=js --ext=jsx .",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom --verbose"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "index.js",
