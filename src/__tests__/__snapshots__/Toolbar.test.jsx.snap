@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders toolbar should render a toolbar 1`] = `
+<Menu
+  className="ui teal inverted menu"
+  size="small"
+>
+  <MenuItem
+    className="ui button"
+  >
+    <Icon
+      as="i"
+      className="slack icon large"
+      name="slack"
+    />
+  </MenuItem>
+  <Dropdown
+    additionLabel="Add "
+    additionPosition="top"
+    closeOnBlur={true}
+    icon="dropdown"
+    item={true}
+    minCharacters={1}
+    noResultsMessage="No results found."
+    openOnFocus={true}
+    renderLabel={[Function]}
+    searchInput="text"
+    selectOnBlur={true}
+    text="Channel name"
+  >
+    <DropdownMenu>
+      <DropdownItem>
+        Team 1
+      </DropdownItem>
+      <DropdownItem>
+        Team 2
+      </DropdownItem>
+      <DropdownItem>
+        Team 3
+      </DropdownItem>
+    </DropdownMenu>
+  </Dropdown>
+  <MenuMenu
+    position="right"
+  >
+    <MenuItem
+      className="ui button"
+    >
+      <Icon
+        as="i"
+        className="smile icon large"
+        name="smile"
+      />
+    </MenuItem>
+  </MenuMenu>
+</Menu>
+`;
