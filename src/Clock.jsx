@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
 
 const WEEKDAYS = [
   'Sunday',
@@ -9,7 +9,7 @@ const WEEKDAYS = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday'
+  'Saturday',
 ];
 
 const MONTHS = [
@@ -24,7 +24,7 @@ const MONTHS = [
   'September',
   'October',
   'November',
-  'December'
+  'December',
 ];
 
 type State = {
@@ -32,19 +32,18 @@ type State = {
 }
 
 export default class Clock extends React.Component {
-  state: State;
-
   constructor(props: Object) {
     super(props);
     this.state = {
       date: new Date(),
     };
   }
+  state: State;
 
   componentDidMount() {
     setInterval(
       () => this.tick(),
-      1000
+      1000,
     );
   }
 
@@ -54,7 +53,7 @@ export default class Clock extends React.Component {
 
   tick() {
     this.setState({
-      date: new Date()
+      date: new Date(),
     });
   }
 
@@ -70,5 +69,3 @@ export default class Clock extends React.Component {
     );
   }
 }
-
-export default Clock;
