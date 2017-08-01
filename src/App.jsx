@@ -1,7 +1,7 @@
 // @flow
-
-import Clock from './Clock.js';
+import MessageList from './MessageList.js'
 import React, { Component } from 'react';
+import Toolbar from './Toolbar.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,9 +11,10 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
         </div>
-          <Clock />
+        <div />
+        <Toolbar />
+        <MessageList />
       </div>
     );
   }

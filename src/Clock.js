@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 
 const WEEKDAYS = [
   'Sunday',
@@ -31,7 +31,7 @@ type State = {
   date: Date,
 }
 
-class Clock extends React.Component {
+export default class Clock extends React.Component {
   state: State;
 
   constructor(props: Object) {
