@@ -2,16 +2,17 @@
 
 exports[`Renders toolbar should render a toolbar 1`] = `
 <Menu
-  className="ui inverted menu undefined"
+  className="ui undefined inverted menu"
   size="small"
 >
   <MenuItem
     className="ui button"
   >
-    <Icon
-      as="i"
-      className="slack icon large"
-      name="slack"
+    <Image
+      as="img"
+      avatar={true}
+      src="Slack_Icon.png"
+      ui={true}
     />
   </MenuItem>
   <Dropdown
@@ -46,10 +47,11 @@ exports[`Renders toolbar should render a toolbar 1`] = `
     <MenuItem
       className="ui button"
     >
-      <Icon
-        as="i"
-        className="smile icon large"
-        name="smile"
+      <Image
+        as="img"
+        avatar={true}
+        src="smile.jpg"
+        ui={true}
       />
     </MenuItem>
   </MenuMenu>
