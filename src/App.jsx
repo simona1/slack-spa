@@ -1,17 +1,21 @@
+// @flow
 import React from 'react';
+import MessageList from './MessageList';
+import Toolbar from './Toolbar';
 import logo from './logo.svg';
 import './App.css';
 
-const App = () => (
-  <div className="App">
-    <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h2>Welcome to React</h2>
+function App() {
+  return (
+    <div className="App">
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+      </div>
+      <div />
+      <Toolbar />
+      <MessageList />
     </div>
-    <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
-  </div>
-);
+  );
+}
 
 export default App;
