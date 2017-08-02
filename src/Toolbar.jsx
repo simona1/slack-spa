@@ -25,18 +25,9 @@ export default function Toolbar({ color }: Props) {
       </Dropdown>
       <Menu.Menu position="right">
         <Menu.Item className="ui button">
-<<<<<<< HEAD
           <Image avatar src={smile} />
-=======
-          <Icon name="smile" className="smile icon large" />
->>>>>>> 20fe7fcfe5c5db8c017cf09dd72d66563ef07969
         </Menu.Item>
       </Menu.Menu>
     </Menu>
   );
 }
-<<<<<<< HEAD
-=======
-
-export default Toolbar;
->>>>>>> 20fe7fcfe5c5db8c017cf09dd72d66563ef07969
