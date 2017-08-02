@@ -4,8 +4,11 @@ import React from 'react';
 import './index.css';
 
 function Toolbar() {
+  const color = 'teal';
+  const menuClasses = 'ui inverted menu';
+
   return (
-    <Menu size="small" className="ui teal inverted menu">
+    <Menu size="small" className={`${menuClasses} ${color}`}>
       <Menu.Item className="ui button">
         <Icon name="slack" className="slack icon large" />
       </Menu.Item>
