@@ -2,7 +2,7 @@
 
 exports[`Renders toolbar should render a toolbar 1`] = `
 <Menu
-  className="ui inverted menu teal"
+  className="ui inverted menu undefined"
   size="small"
 >
   <MenuItem

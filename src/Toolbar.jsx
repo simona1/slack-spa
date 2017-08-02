@@ -1,16 +1,20 @@
 // @flow
-import { Dropdown, Icon, Menu } from 'semantic-ui-react';
+import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
+import slack from './images/Slack_Icon.png';
+import smile from './images/smile.jpg';
 import './index.css';
 
-function Toolbar() {
-  const color = 'teal';
-  const menuClasses = 'ui inverted menu';
+type Props = {
+  color: string,
+}
 
+export default function Toolbar({ color }: Props) {
+  const menuClasses = `ui ${color} inverted menu`;
   return (
-    <Menu size="small" className={`${menuClasses} ${color}`}>
+    <Menu size="small" className={menuClasses}>
       <Menu.Item className="ui button">
-        <Icon name="slack" className="slack icon large" />
+        <Image avatar src={slack} />
       </Menu.Item>
       <Dropdown item text="Channel name">
         <Dropdown.Menu>
@@ -21,11 +25,9 @@ function Toolbar() {
       </Dropdown>
       <Menu.Menu position="right">
         <Menu.Item className="ui button">
-          <Icon name="smile" className="smile icon large" />
+          <Image avatar src={smile} />
         </Menu.Item>
       </Menu.Menu>
     </Menu>
   );
 }
-
-export default Toolbar;
