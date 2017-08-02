@@ -2,42 +2,42 @@
   "1": {
     "id": 1,
     "text": "I refresh Twitter as thoughtlessly as some twirl their hair.",
-    "userAvatar": "http://semantic-ui.com/images/avatar2/small/lena.png",
+    "avatarUrl": "http://semantic-ui.com/images/avatar2/small/lena.png",
     "name": "Lena Dunham",
     "timestamp": "2017-08-01"
   },
   "2": {
     "id": 2,
     "text": "I am not a good terrified person.",
-    "userAvatar": "http://semantic-ui.com/images/avatar/large/stevie.jpg",
+    "avatarUrl": "http://semantic-ui.com/images/avatar/large/stevie.jpg",
     "name": "Stevie Nicks",
     "timestamp": "2017-08-01"
   },
   "3": {
     "id": 3,
     "text": "There ain't nothin' more dangerous in this world than a fool with a cause...",
-    "userAvatar": "http://semantic-ui.com/images/avatar2/small/matthew.png",
+    "avatarUrl": "http://semantic-ui.com/images/avatar2/small/matthew.png",
     "name": "Matthew McConaughey",
     "timestamp": "2017-08-01"
   },
   "4": {
     "id": 4,
     "text": "I was under the false impression that I could sing in high school, so I did a lot of musical stuff.",
-    "userAvatar": "http://semantic-ui.com/images/avatar2/small/rachel.png",
+    "avatarUrl": "http://semantic-ui.com/images/avatar2/small/rachel.png",
     "name": "Rachel Brosnahan",
     "timestamp": "2017-08-01"
   },
   "5": {
     "id": 5,
     "text": "I volunteer! - I gasp. I volunteer as tribute!",
-    "userAvatar": "http://semantic-ui.com/images/avatar/large/jenny.jpg",
+    "avatarUrl": "http://semantic-ui.com/images/avatar/large/jenny.jpg",
     "name": "Jennifer Lawrence",
     "timestamp": "2017-08-01"
   },
   "6": {
     "id": 6,
     "text": "I got sunshine in my pocket.",
-    "userAvatar": "http://semantic-ui.com/images/avatar/large/justen.jpg",
+    "avatarUrl": "http://semantic-ui.com/images/avatar/large/justen.jpg",
     "name": "Justin Timberlake",
     "timestamp": "2017-08-01"
   }

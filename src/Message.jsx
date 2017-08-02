@@ -16,10 +16,9 @@ export default function Message({ avatarUrl, name, text, timestamp }: Props) {
       <Image avatar src={avatarUrl} />
       <List.Content>
         <List.Header>
-          {name}
+          {`${name}, ${timestamp}`}
           <List.Description>
             {text}
-            {timestamp}
           </List.Description>
         </List.Header>
       </List.Content>
