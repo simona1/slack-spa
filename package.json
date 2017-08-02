@@ -12,7 +12,6 @@
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-fontawesome": "1.6.1",
-    "semantic-ui-css": "2.2.11",
     "semantic-ui-react": "0.71.3"
   },
   "devDependencies": {
