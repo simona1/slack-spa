@@ -3,14 +3,14 @@
 import React from 'react';
 import { Image, List } from 'semantic-ui-react';
 
-type Props = {
+type MessageProps = {
   avatarUrl: string,
   name: string,
   text: string,
   timestamp: any,
 };
 
-export default function Message({ avatarUrl, name, text, timestamp }: Props) {
+export default function Message({ avatarUrl, name, text, timestamp }: MessageProps) {
   return (
     <List.Item className="listItem">
       <Image avatar src={avatarUrl} />
