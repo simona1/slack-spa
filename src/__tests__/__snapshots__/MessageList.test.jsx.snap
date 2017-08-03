@@ -13,7 +13,7 @@ exports[`Renders message list should render a non-empty message list 1`] = `
   <Message
     avatarUrl="http://semantic-ui.com/images/avatar/large/stevie.jpg"
     name="Stevie Nicks"
-    text="I am not a good terrified person."
+    text="I am pretty fearless, and you know why? Because I don't handle fear very well; I am not a good terrified person."
     timestamp="2017-08-01"
   />
   <Message
@@ -56,7 +56,7 @@ exports[`Renders message list should render an empty message list 1`] = `
   <Message
     avatarUrl="http://semantic-ui.com/images/avatar/large/stevie.jpg"
     name="Stevie Nicks"
-    text="I am not a good terrified person."
+    text="I am pretty fearless, and you know why? Because I don't handle fear very well; I am not a good terrified person."
     timestamp="2017-08-01"
   />
   <Message
