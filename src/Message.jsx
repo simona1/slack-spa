@@ -7,10 +7,12 @@ type MessageProps = {
   avatarUrl: string,
   name: string,
   text: string,
-  timestamp: any,
+  timestamp: string,
 };
 
-export default function Message({ avatarUrl, name, text, timestamp }: MessageProps) {
+export default function Message(
+  { avatarUrl, name, text, timestamp }: MessageProps,
+) {
   return (
     <List.Item className="listItem">
       <Image avatar src={avatarUrl} />
