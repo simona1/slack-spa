@@ -24,10 +24,6 @@
   to { transform: rotate(360deg); }
 }
 
-.MessageView {
-  text-align: left;
-}
-
 .LoginView {
   height: 50px;
   padding: 10px;

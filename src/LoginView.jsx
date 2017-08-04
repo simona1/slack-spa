@@ -11,11 +11,10 @@ type LoginViewProps = {
 };
 
 export default function LoginView({ isConnecting }: LoginViewProps) {
-  const conect = isConnecting;
   return (
-    <Button size="big" color={"teal"} href={slackConnectHref}>
+    <Button size="big" color={'teal'} href={slackConnectHref}>
       <Image avatar src={slack} />
-      Connect with slack
+      Connect with slack: {isConnecting}
     </Button>
   );
 }

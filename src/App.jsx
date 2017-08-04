@@ -15,10 +15,9 @@ export default function App() {
           <img src={logo} className="App-logo" alt="slack-logo" />
         </div>
         <div className="connectButton">
-          <LoginView />
+          <LoginView isConnecting={false}/>
         </div>
       </div>
-
 
       <div className="Message-view">
         <Toolbar color={COLORS[1]} />
