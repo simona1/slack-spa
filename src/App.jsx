@@ -5,7 +5,6 @@ import LoginView from './LoginView';
 import MessageList from './MessageList';
 import Toolbar from './Toolbar';
 import logo from './images/slack-logo.png';
-import slackPrompt from './connectWithSlackTag';
 import './App.css';
 
 export default function App() {
