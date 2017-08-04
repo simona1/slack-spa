@@ -25,7 +25,17 @@ type Action = {
 };
 
 export function storeReducer(state: State, action: Action): State {
-  return state;
+  let newMessages: {[string]: {[Id]: MessageType}};
+  switch (action.type) {
+    case 'SLACK_LOGIN':
+      return {
+        ...state,
+
+      };
+    default:
+      return state;
+
+  }
 }
 
 const store = createStore(
