@@ -4,18 +4,18 @@ import React from 'react';
 import { Image, List } from 'semantic-ui-react';
 
 type MessageProps = {
-  avatarUrl: string,
+  avatarImage: string,
   name: string,
   text: string,
   timestamp: string,
 };
 
 export default function Message(
-  { avatarUrl, name, text, timestamp }: MessageProps,
+  { avatarImage, name, text, timestamp }: MessageProps,
 ) {
   return (
     <List.Item className="listItem">
-      <Image avatar src={avatarUrl} />
+      <Image avatar src={avatarImage} />
       <List.Content>
         <List.Header>
           {`${name}, ${timestamp}`}

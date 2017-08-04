@@ -6,11 +6,25 @@ import thunkMiddleware from 'redux-thunk';
 type Id = mixed;
 
 export type MessageType = {
-  avatarUrl: string,
+  avatarImage: string,
   name: string,
   text: string,
   timestamp: string,
 };
+
+//TODO: example object as the incoming `messages` structure
+// {
+//   123456: { userId: 'U6FMJ3J3Z',
+// text: 'Here is a fantastic message.',
+// date: 2017-08-04T17:01:15.178Z,
+// rawTS: 123456,
+// channelId: 'C6DUVSW3A' },
+// }
+
+// TODO: write function to sort rawTS a.k.a. messsageIds in decreasing order
+
+
+
 
 export type State = {
   isShowingScores: boolean,

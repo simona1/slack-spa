@@ -4,7 +4,7 @@ import React from 'react';
 import { Button, Image } from 'semantic-ui-react';
 import logo from './images/slack-logo.png';
 import slackConnectHref from './connectWithSlackHref';
-import slack from './images/Slack_Icon.png';
+import slack from './images/slack_icon.png';
 
 type LoginViewProps = {
   isConnecting: boolean,

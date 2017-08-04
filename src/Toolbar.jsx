@@ -1,8 +1,8 @@
 // @flow
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
-import slack from './images/Slack_Icon.png';
-import smile from './images/smile.jpg';
+import slack from './images/slack_icon.png';
+import smile from './images/emojis/smile.jpg';
 import './index.css';
 
 type Props = {
