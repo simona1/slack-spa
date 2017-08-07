@@ -64,12 +64,19 @@ function storeReducer(state: State, action): State {
         channelData: newChannelData,
       };
     case 'RECEIVED_CURRENT_SCORE_FOR_CHANNEL':
-        const scoreData = {...state.scoreData};
-        scoreData[action.channel] = action.score;
-        return {
-          ...state,
-          scoreData,
-        }
+      const scoreData = {...state.scoreData};
+      scoreData[action.channel] = action.score;
+      return {
+        ...state,
+        scoreData,
+      };
+    case 'DISPLAY_CURRENT_SCORE':
+    return {
+      ...state,
+      isShowingScores: true,
+    };
+
+
     default:
       return state;
   }
