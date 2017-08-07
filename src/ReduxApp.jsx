@@ -8,10 +8,12 @@ const ReduxApp = connect(
   state => ({
     isShowingScores: state.isShowingScores,
     messages: state.messages,
+    score: state.score,
     selectedChannel: state.selectedChannel,
     slackSession: state.slackSession,
   }),
   {
+
     // onSlackLogin: Actions.slackLogin,
     // onSlackLoginSuccess: Actions.slackLoginSuccess,
     // onSlackLoginError: Actions.slackLoginError,

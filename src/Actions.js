@@ -11,34 +11,14 @@ type GetState = () => State;
 // }
 
 const Actions = {
-  // slackLogin()
+  selectChannel(selectedChannel: string) {
+    return {
+      selectedChannel,
+      type: 'SELECT_CHANNEL',
+    };
+  }
 
-  // changeSubject(subject: string) {
-  //   return {
-  //     subject,
-  //     type: 'CHANGE_SUBJECT',
-  //   };
-  // },
-  //
-  // deleteMessages() {
-  //   return function(dispatch: Dispatch, getState: GetState) {
-  //     const messageIds = getSelectedMessageIds(getState());
-  //     dispatch({
-  //       type: 'DELETE_MESSAGES',
-  //     });
-  //     Api.deleteMessages(messageIds);
-  //   };
-  // },
-  //
-  // fetchMessages() {
-  //   return async function(dispatch: Dispatch) {
-  //     const messages = await Api.getMessages();
-  //     dispatch({
-  //       messages,
-  //       type: 'FETCH_MESSAGES',
-  //     });
-  //   };
-  // },
+
 
 };
 
