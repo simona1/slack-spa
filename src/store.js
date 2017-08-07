@@ -4,6 +4,9 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import messages from './messages.json';
 
+/* eslint-disable */
+console.log('importing store');
+
 export type Id = mixed;
 
 export type MessageType = {
@@ -26,27 +29,30 @@ export type MessageType = {
 
 export type State = {
   isShowingScores: boolean,
-  messages: {[string]: {[Id]: MessageType}},
-  selectedChannel: ?string,
-  // TODO: make type more specific
-  slackSession: ?Object,
-  score: mixed,
+  isConnectedWithSlack: boolean,
+  channelData: {[string]: ?{[Id]: MessageType}},
+  scoreData: {[string]: ?number},
 };
 
-type Action = {
-  selectedChannel?: string,
-  type: string,
-};
-
-export function storeReducer(state: State, action: Action): State {
+function storeReducer(state: State, action): State {
   console.log('got an action:', action);
-  let newMessages: {[string]: {[Id]: MessageType}};
+
   switch (action.type) {
-    case 'SELECTED_CHANNEL':
+    case 'CONNECTED_WITH_SLACK':
       return {
         ...state,
-        selectedChannel: action.selectedChannel,
+        isConnectedWithSlack: true,
       };
+    case 'RECEIVED_CHANNEL_LIST':
+      const channelData = {};
+      action.channels.forEach((channel) => {
+        channelData[channel] = null;
+      });
+      return {
+        ...state,
+        channelData,
+      };
+
     default:
       return state;
   }
@@ -56,9 +62,9 @@ const store = createStore(
   storeReducer,
   {
     isShowingScores: false,
-    messages: {},
-    selectedChannel: null,
-    slackSession: null,
+    isConnectedWithSlack: false,
+    channelData: {},
+    scoreData: {},
   },
   applyMiddleware(
     thunkMiddleware,

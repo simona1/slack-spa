@@ -6,11 +6,7 @@ import logo from './images/slack-logo.png';
 import slackConnectHref from './connectWithSlackHref';
 import slack from './images/slack_icon.png';
 
-type LoginViewProps = {
-  isConnecting: boolean,
-};
-
-export default function LoginView({ isConnecting }: LoginViewProps) {
+export default function LoginView() {
   return (
     <div>
       <div className="SlackApp">
@@ -20,7 +16,7 @@ export default function LoginView({ isConnecting }: LoginViewProps) {
         <div className="connectButton">
           <Button size="big" color={'teal'} href={slackConnectHref}>
             <Image avatar src={slack} />
-            Connect with slack {isConnecting}
+            Connect with Slack
           </Button>
         </div>
       </div>

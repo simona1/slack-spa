@@ -16,8 +16,7 @@ const Actions = {
       selectedChannel,
       type: 'SELECT_CHANNEL',
     };
-  }
-
+  },
 
 
 };

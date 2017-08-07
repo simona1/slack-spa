@@ -25,7 +25,7 @@ export default function MessageList(
             key={msgId}
             avatarImage={owl}
             name={name}
-            text={`${avatarImage} says: ` + text}
+            text={`${avatarImage} says: ${text}`}
             timestamp={timestamp}
           />
         );

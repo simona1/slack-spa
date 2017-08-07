@@ -1,3 +1,4 @@
+/* eslint-disable */
 import io from 'socket.io';
 
 const socket = io.connect('localhost:4000');
@@ -5,13 +6,13 @@ const socket = io.connect('localhost:4000');
 
 const data = {};
 
-socket.on('messages', messages => {
+socket.on('messages', (messages) => {
   console.log(messages);
   // this should dispatch an action
   data.messages = messages;
 });
 
-socket.on('score', score => {
+socket.on('score', (score) => {
   console.log(score);
   // this should dispatch an action
   data.score = score;
