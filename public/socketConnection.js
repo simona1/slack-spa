@@ -9,6 +9,7 @@ socket.on('messages', (messages) => {
   console.log(messages);
   // this should dispatch an action
   data.messages = messages;
+  //processMessages(data);
 });
 
 socket.on('score', (score) => {

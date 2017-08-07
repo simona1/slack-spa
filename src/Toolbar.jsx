@@ -29,14 +29,13 @@ const emojis = Object.keys(images).reduce(
 );
 
 const scoreToEmoji =
-[
-  'angry',
-  'sad',
-  'disappointed',
-  'neutral',
-  'smile',
-  'happy',
-];
+  [
+    'frustrated',
+    'sad',
+    'neutral',
+    'smile',
+    'happy',
+  ];
 
 type Props = {
   color: string,
@@ -45,15 +44,16 @@ type Props = {
 };
 
 export default class Toolbar extends React.Component {
+
+  componentWillMount() {
+    store.subscribe(() => this.forceUpdate());
+  }
+
   props: {
     color: string,
     isShowingScores: boolean,
     score: mixed,
   };
-
-  componentWillMount() {
-    store.subscribe(() => this.forceUpdate());
-  }
 
   render() {
     const { color, score, isShowingScores } = this.props;
