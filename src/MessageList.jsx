@@ -6,30 +6,48 @@ import Message from './Message';
 import type { MessageType } from './store';
 import owl from './images/avatars/owl.png';
 
+import store from './store';
+import Actions from './Actions';
 
 type MessageListProps = {
-  messages: {[mixed]: MessageType},
+  selectedChannel: ?string,
 };
 
-export default function MessageList(
-  { messages }: MessageListProps,
-) {
-  const messageIds = Object.keys(messages);
+export default class MessageList extends React.Component {
+  componentWillMount() {
+    store.subscribe(() => this.forceUpdate());
+  }
 
-  return (
-    <List celled>
-      {messageIds.map((msgId) => {
-        const { avatarImage, name, text, timestamp } = messages[msgId];
-        return (
-          <Message
-            key={msgId}
-            avatarImage={owl}
-            name={name}
-            text={`${avatarImage} says: ${text}`}
-            timestamp={timestamp}
-          />
+  render() {
+    const {selectedChannel} = this.props;
+    let messages = store.getState().channelData[this.props.selectedChannel];
+    if (!messages) {
+      if (selectedChannel) {
+        setTimeout(
+          () => store.dispatch(Actions.fetchMessagesForChannel(selectedChannel)),
+          0
         );
-      })}
-    </List>
-  );
+      }
+      messages = {};
+    }
+
+    const messageIds = Object.keys(messages);
+
+    return (
+      <List celled>
+        {messageIds.map((msgId) => {
+          const { avatarImage, name, text, timestamp } = messages[msgId];
+          return (
+            <Message
+              key={msgId}
+              avatarImage={owl}
+              name={name}
+              text={`${avatarImage} says: ${text}`}
+              timestamp={timestamp}
+            />
+          );
+        })}
+      </List>
+    );
+  }
 }

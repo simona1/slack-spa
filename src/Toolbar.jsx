@@ -5,6 +5,7 @@ import slack from './images/slack_icon.png';
 import './index.css';
 
 import store from './store';
+import Actions from './Actions';
 
 function importAll(r) {
   return r.keys().reduce(
@@ -44,8 +45,12 @@ type Props = {
 };
 
 export default class Toolbar extends React.Component {
-
   componentWillMount() {
+    const channels = Object.keys(store.getState().channelData);
+    if (channels.length === 0) {
+      store.dispatch(Actions.fetchChannels());
+    }
+
     store.subscribe(() => this.forceUpdate());
   }
 
@@ -64,15 +69,22 @@ export default class Toolbar extends React.Component {
       (!isShowingScores || !hasValidScore) ?
       scoreToEmoji[3] :
       scoreToEmoji[parseInt(score, 10)];
+    const {selectedChannel} = store.getState();
     return (
       <Menu size="small" className={menuClasses}>
         <Menu.Item className="ui button">
           <Image avatar src={slack} />
         </Menu.Item>
-        <Dropdown item text="Channel name">
+        <Dropdown item text={selectedChannel || 'Select a channel'}>
           <Dropdown.Menu>
             {Object.keys(store.getState().channelData).map(
-              channel => <Dropdown.Item key={channel}>{channel}</Dropdown.Item>,
+              channel =>
+                <Dropdown.Item
+                  key={channel}
+                  onClick={() => store.dispatch(Actions.selectChannel(channel))}
+                  selected={channel === selectedChannel}>
+                  {channel}
+                </Dropdown.Item>,
             )}
           </Dropdown.Menu>
         </Dropdown>

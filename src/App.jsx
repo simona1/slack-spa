@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import COLORS from './Colors';
 import LoginView from './LoginView';
 import MessageList from './MessageList';
-import messages from './messages.json';
+//import messages from './messages.json';
 import Toolbar from './Toolbar';
 import './App.css';
 import type { Id, MessageType } from './store';
@@ -41,7 +41,7 @@ class App extends Component {
           />
         </div>
         <div className="listColor">
-          <MessageList messages={messages} />
+          <MessageList selectedChannel={state.selectedChannel} />
         </div>
       </div>
     );

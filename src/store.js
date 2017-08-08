@@ -4,9 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import messages from './messages.json';
 
-/* eslint-disable */
-console.log('importing store');
-
 export type Id = mixed;
 
 export type MessageType = {
@@ -16,26 +13,20 @@ export type MessageType = {
   timestamp: string,
 };
 
-// TODO: example object as the incoming `messages` structure
-// {
-//   123456: { userId: 'U6FMJ3J3Z',
-// text: 'Here is a fantastic message.',
-// date: 2017-08-04T17:01:15.178Z,
-// rawTS: 123456,
-// channelId: 'C6DUVSW3A' },
-// }
-
-// TODO: write function to sort rawTS a.k.a. messsageIds in decreasing order
+type ChannelData = {[string]: ?{[Id]: {[Id]: MessageType}}};
 
 export type State = {
   isShowingScores: boolean,
   isConnectedWithSlack: boolean,
-  channelData: {[string]: ?{[Id]: {[Id]: MessageType}}},
+  channelData: ChannelData,
   scoreData: {[string]: ?number},
+  selectedChannel: ?string,
 };
 
 function storeReducer(state: State, action): State {
-  console.log('got an action:', action);
+  console.log('Action:', action);
+
+  let newChannelData: ChannelData;
 
   switch (action.type) {
     case 'CONNECTED_WITH_SLACK':
@@ -43,50 +34,51 @@ function storeReducer(state: State, action): State {
         ...state,
         isConnectedWithSlack: true,
       };
-    case 'RECEIVED_CHANNEL_LIST':
-      const channelData = {};
-      action.channels.forEach((channel) => {
-        channelData[channel] = null;
-      });
+    case 'SELECT_CHANNEL':
       return {
         ...state,
-        channelData,
+        selectedChannel: action.channel,
+      };
+    case 'RECEIVED_CHANNEL_LIST':
+      newChannelData = {...state.channelData};
+      action.channels.forEach((channel) => {
+        newChannelData[channel] = newChannelData[channel] || null;
+      });
+      let newSelectedChannel = state.selectedChannel;
+      if (!newSelectedChannel) {
+        newSelectedChannel = action.channels[0];
+      }
+      return {
+        ...state,
+        channelData: newChannelData,
+        selectedChannel: newSelectedChannel,
       };
     case 'RECEIVED_MESSAGES_FOR_CHANNEL':
-      const newChannelData = { ...state.channelData };
+      newChannelData = {...state.channelData};
       newChannelData[action.channel] = {...newChannelData[action.channel]};
-      const messageIds = Object.keys(action.messages);
-      messageIds.forEach(id => {
+      Object.keys(action.messages).forEach(id => {
         newChannelData[action.channel][id] = action.messages[id];
       });
       return {
         ...state,
         channelData: newChannelData,
       };
-    case 'RECEIVED_CURRENT_SCORE_FOR_CHANNEL':
-      const scoreData = {...state.scoreData};
-      scoreData[action.channel] = action.score;
+    case 'RECEIVED_SCORE_FOR_MESSAGES':
+      const newScoreData = {...state.scoreData};
+      newScoreData[action.channel] = action.score;
       return {
         ...state,
-        scoreData,
+        scoreData: newScoreData,
       };
-    case 'DISPLAY_CURRENT_SCORE':
-    return {
-      ...state,
-      isShowingScores: true,
-    };
-
-
+    case 'SHOW_SCORE':
+      return {
+        ...state,
+        isShowingScores: true,
+      };
     default:
       return state;
   }
 }
-
-
-//
-// store.dispatch({type: 'RECEIVED_MESSAGES_FOR_CHANNEL', channel: '#random', messages: {"1": {"id": 1, "text": "lalaland", "avatarImage": "Lena", "name": "Lena Dunham", "timestamp": "2017-08-01"}, "2": {"id": 2, "text": "hi", "avatarImage": "Jenny", "name": "Jennifer", "timestamp": "2017-08-02"}}})
-
-// store.dispatch({type: 'RECEIVED_CURRENT_SCORE_FOR_CHANNEL', channel: '#random', scoreData: 2})
 
 const store = createStore(
   storeReducer,
@@ -95,6 +87,7 @@ const store = createStore(
     isConnectedWithSlack: false,
     channelData: {},
     scoreData: {},
+    selectedChannel: null,
   },
   applyMiddleware(
     thunkMiddleware,
@@ -102,7 +95,7 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log('new store state: ', store.getState());
+  console.log('State: ', store.getState());
 });
 
 window.store = store;
