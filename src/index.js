@@ -16,7 +16,7 @@ ReactDOM.render(
 registerServiceWorker();
 
 const socket = openSocket('http://localhost:4000');
-//  'https://databraid.localtunnel.me'
+//const socket = openSocket('https://databraid.localtunnel.me');
 
 
 socket.on('messages', (messages) => {

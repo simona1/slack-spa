@@ -76,6 +76,8 @@ const Actions = {
         case '#redux':
           messages = fakeMessages;
           break;
+        default:
+          return;
       }
 
       // TODO: replace with real Api call
