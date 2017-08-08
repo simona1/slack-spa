@@ -75,6 +75,23 @@ function storeReducer(state: State, action): State {
         ...state,
         isShowingScores: true,
       };
+    case 'RECEIVED_NEW_MESSAGES':
+      console.log('action.messages', action.messages);
+
+        newChannelData = {...state.channelData};
+
+        Object.keys(action.messages).forEach(channelId => {
+        newChannelData[channelId] = {...newChannelData[channelId]};
+        Object.keys(action.messages[channelId]).forEach(messageId => {
+            newChannelData[channelId][messageId] = action.messages[channelId][messageId];
+          });
+        });
+
+        return {
+          ...state,
+          channelData: newChannelData,
+        };
+
     default:
       return state;
   }
