@@ -10,8 +10,6 @@ import type { Id, MessageType } from './store';
 
 import store from './store';
 
-// import data from './socketConnection';
-
 // type AppProps = {
 //
 // };
