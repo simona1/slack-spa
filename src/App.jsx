@@ -6,7 +6,7 @@ import MessageList from './MessageList';
 //import messages from './messages.json';
 import Toolbar from './Toolbar';
 import './App.css';
-import type { Id, MessageType } from './store';
+//import type { Id, MessageType } from './store';
 
 import store from './store';
 

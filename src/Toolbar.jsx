@@ -1,9 +1,9 @@
 // @flow
+
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
 import slack from './images/slack_icon.png';
 import './index.css';
-
 import store from './store';
 import Actions from './Actions';
 
@@ -37,12 +37,6 @@ const scoreToEmoji =
     'smile',
     'happy',
   ];
-
-type Props = {
-  color: string,
-  isShowingScores: boolean,
-  score: mixed,
-};
 
 export default class Toolbar extends React.Component {
   componentWillMount() {

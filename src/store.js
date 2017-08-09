@@ -2,7 +2,7 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import messages from './messages.json';
+//import messages from './messages.json';
 
 export type Id = mixed;
 
@@ -77,9 +77,7 @@ function storeReducer(state: State, action): State {
       };
     case 'RECEIVED_NEW_MESSAGES':
       console.log('action.messages', action.messages);
-
         newChannelData = {...state.channelData};
-
         Object.keys(action.messages).forEach(channelId => {
         newChannelData[channelId] = {...newChannelData[channelId]};
         Object.keys(action.messages[channelId]).forEach(messageId => {
