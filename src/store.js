@@ -2,7 +2,6 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-//import messages from './messages.json';
 
 export type Id = mixed;
 
@@ -68,6 +67,7 @@ function storeReducer(state: State, action): State {
       newScoreData[action.channel] = action.score;
       return {
         ...state,
+        isShowingScores: true,
         scoreData: newScoreData,
       };
     case 'SHOW_SCORE':
@@ -113,6 +113,7 @@ store.subscribe(() => {
   console.log('State: ', store.getState());
 });
 
+// TODO: remove
 window.store = store;
 
 export default store;

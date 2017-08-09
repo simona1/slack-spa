@@ -3,7 +3,6 @@
 import React from 'react';
 import { List } from 'semantic-ui-react';
 import Message from './Message';
-//import type { MessageType } from './store';
 import owl from './images/avatars/owl.png';
 
 import store from './store';

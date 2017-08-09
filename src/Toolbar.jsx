@@ -3,40 +3,25 @@
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
 import slack from './images/slack_icon.png';
+import frustrated from './images/emojis/frustrated.jpg';
+import sad from './images/emojis/sad.jpg';
+import neutral from './images/emojis/neutral.jpg';
+import happy from './images/emojis/happy.jpg';
+import smile from './images/emojis/smile.jpg';
+import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
+
 import './index.css';
 import store from './store';
 import Actions from './Actions';
 
-function importAll(r) {
-  return r.keys().reduce(
-    (map, path) => {
-      map[path.replace('./', '')] = r(path);
-      return map;
-    },
-    {},
-  );
-}
-
-const images = importAll(
-  (require: any).context('./images/emojis', false, /\.(png|jpg)$/),
-);
-
-const emojis = Object.keys(images).reduce(
-  (map, path) => {
-    map[path.replace(/\.(png|jpg)$/, '')] = path;
-    return map;
-  },
-  {},
-);
-
-const scoreToEmoji =
-  [
-    'frustrated',
-    'sad',
-    'neutral',
-    'smile',
-    'happy',
-  ];
+const emojis =
+  {
+    frustrated,
+    sad,
+    neutral,
+    smile,
+    happy,
+  };
 
 export default class Toolbar extends React.Component {
   componentWillMount() {
@@ -44,6 +29,8 @@ export default class Toolbar extends React.Component {
     if (channels.length === 0) {
       store.dispatch(Actions.fetchChannels());
     }
+    //const currentScores = store.getState().scoreData;
+
 
     store.subscribe(() => this.forceUpdate());
   }
@@ -57,13 +44,9 @@ export default class Toolbar extends React.Component {
   render() {
     const { color, score, isShowingScores } = this.props;
     const menuClasses = `ui ${color} inverted menu`;
-    const hasValidScore = parseInt(score, 10) < scoreToEmoji.length;
 
-    const currentEmoji =
-      (!isShowingScores || !hasValidScore) ?
-      scoreToEmoji[3] :
-      scoreToEmoji[parseInt(score, 10)];
     const {selectedChannel} = store.getState();
+
     return (
       <Menu size="small" className={menuClasses}>
         <Menu.Item className="ui button">
@@ -86,7 +69,7 @@ export default class Toolbar extends React.Component {
           <Menu.Item className="ui button">
             <Image
               avatar
-              src={images[emojis[currentEmoji]]}
+              src={emojis.frustrated}
             />
           </Menu.Item>
         </Menu.Menu>

@@ -1,8 +1,6 @@
 // @flow
 
-// import Api from './Api.js';
 import type { State } from './store';
-
 import fakeMessages from './messages.json';
 
 type Dispatch = ({type: string}) => void;
@@ -14,6 +12,7 @@ function fakePromise(data, delay) {
   });
 }
 
+// TODO: alphabetize actions
 const Actions = {
   connectWithSlack() {
     return {
@@ -32,6 +31,13 @@ const Actions = {
     };
   },
 
+  processNewScore(newScoreData: {}) {
+    return {
+      scoreData: newScoreData,
+      type: 'RECEIVED_SCORE_FOR_MESSAGES',
+    };
+  },
+
   processNewMessages(newMessageData: {}) {
     // Mark that we have messages to avoid fetching multiple times.
     return {
@@ -39,6 +45,10 @@ const Actions = {
       type: 'RECEIVED_NEW_MESSAGES',
     };
   },
+
+  // fetchScoreForChannel(channel: string) {
+  //
+  // }
 
 
   fetchMessagesForChannel(channel: string) {
@@ -61,8 +71,8 @@ const Actions = {
       switch (channel) {
         case '#random':
           messages = {
-            12345: {
-              "id": 12345,
+            X12345: {
+              "id": "X12345",
               "text": "Make it so!",
               "avatarImage": "Picard",
               "name": "Captain Picard",
