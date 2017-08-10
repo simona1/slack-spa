@@ -23,7 +23,6 @@ socket.on('messages', (messages) => {
   store.dispatch(actions.processNewMessages(messages));
 });
 
-socket.on('score', (score) => {
-  console.log('output in index:', score);
-  store.dispatch(actions.processNewScore(score));
+socket.on('score', (scoreData) => {
+  store.dispatch(actions.processNewScores(scoreData));
 });

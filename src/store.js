@@ -26,6 +26,7 @@ function storeReducer(state: State, action): State {
   console.log('Action:', action);
 
   let newChannelData: ChannelData;
+  let newScoreData: {[string]: ?number};
 
   switch (action.type) {
     case 'CONNECTED_WITH_SLACK':
@@ -62,9 +63,9 @@ function storeReducer(state: State, action): State {
         ...state,
         channelData: newChannelData,
       };
-    case 'RECEIVED_SCORE_FOR_MESSAGES':
-      const newScoreData = {...state.scoreData};
-      newScoreData[action.channel] = action.score;
+
+    case 'RECEIVED_NEW_SCORE':
+      newScoreData = {...state.scoreData, ...action.scoreData};
       return {
         ...state,
         isShowingScores: true,
@@ -75,6 +76,7 @@ function storeReducer(state: State, action): State {
         ...state,
         isShowingScores: true,
       };
+
     case 'RECEIVED_NEW_MESSAGES':
       console.log('action.messages', action.messages);
         newChannelData = {...state.channelData};

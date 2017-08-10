@@ -31,10 +31,21 @@ const Actions = {
     };
   },
 
-  processNewScore(newScoreData: {}) {
+  fetchScores() {
+    return async function(dispatch: Dispatch) {
+      // TODO: replace with real Api call
+      const scores = await fakePromise({'#random': 0, '#general': 0.5, '#redux': -0.2});
+      dispatch({
+        scores,
+        type: 'RECEIVED_CHANNEL_LIST',
+      });
+    };
+  },
+
+  processNewScores(scoreData: {[string]: number}) {
     return {
-      scoreData: newScoreData,
-      type: 'RECEIVED_SCORE_FOR_MESSAGES',
+      scoreData,
+      type: 'RECEIVED_NEW_SCORE',
     };
   },
 
@@ -45,10 +56,6 @@ const Actions = {
       type: 'RECEIVED_NEW_MESSAGES',
     };
   },
-
-  // fetchScoreForChannel(channel: string) {
-  //
-  // }
 
 
   fetchMessagesForChannel(channel: string) {

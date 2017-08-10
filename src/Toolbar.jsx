@@ -29,9 +29,6 @@ export default class Toolbar extends React.Component {
     if (channels.length === 0) {
       store.dispatch(Actions.fetchChannels());
     }
-    //const currentScores = store.getState().scoreData;
-
-
     store.subscribe(() => this.forceUpdate());
   }
 
@@ -69,7 +66,7 @@ export default class Toolbar extends React.Component {
           <Menu.Item className="ui button">
             <Image
               avatar
-              src={emojis.frustrated}
+              src={emojis.neutral}
             />
           </Menu.Item>
         </Menu.Menu>
