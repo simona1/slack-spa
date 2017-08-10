@@ -4,7 +4,7 @@ import React from 'react';
 import { Button, Image } from 'semantic-ui-react';
 import logo from './images/slack-logo.png';
 // import slackConnectHref from './connectWithSlackHref';
-import slack from './images/slack_icon.png';
+import slack from './images/iconSlack.png';
 
 import store from './store';
 import Actions from './Actions';
