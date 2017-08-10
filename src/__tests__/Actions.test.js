@@ -38,7 +38,7 @@ describe('Actions', () => {
     });
   });
 
-  it('should should return an action object from processNewMessages', () => {
+  it('should return an action object from processNewMessages', () => {
     const newMessageData = {
       1: {
         1: 'This is a message',

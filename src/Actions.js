@@ -32,6 +32,14 @@ const Actions = {
     };
   },
 
+  processNewMessages(newMessageData: {}) {
+  // Mark that we have messages to avoid fetching multiple times.
+    return {
+      messages: newMessageData,
+      type: 'RECEIVED_NEW_MESSAGES',
+    };
+  },
+
   fetchMessagesForChannel(channel: string) {
     return async function(dispatch: Dispatch, getState: GetState) {
       const oldMessages = getState().channelData[channel];
