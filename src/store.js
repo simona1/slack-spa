@@ -22,9 +22,7 @@ export type State = {
   selectedChannel: ?string,
 };
 
-function storeReducer(state: State, action): State {
-  // console.log('Action:', action);
-
+export function storeReducer(state: State, action): State {
   let newChannelData: ChannelData;
   let newScoreData: {[string]: ?number};
 

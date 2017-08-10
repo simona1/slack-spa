@@ -32,7 +32,8 @@
     "eslint-plugin-react": "7.1.0",
     "react-addons-test-utils": "15.6.0",
     "react-scripts": "1.0.10",
-    "react-test-renderer": "15.6.1"
+    "react-test-renderer": "15.6.1",
+    "redux-testkit": "1.0.6"
   },
   "scripts": {
     "build": "react-scripts build",

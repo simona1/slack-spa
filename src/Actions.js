@@ -50,7 +50,7 @@ const Actions = {
   },
 
   processNewMessages(newMessageData: {}) {
-    // Mark that we have messages to avoid fetching multiple times.
+  // Mark that we have messages to avoid fetching multiple times.
     return {
       messages: newMessageData,
       type: 'RECEIVED_NEW_MESSAGES',
