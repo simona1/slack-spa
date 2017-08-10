@@ -48,16 +48,19 @@ describe('storeReducer', () => {
   });
 
   it('should store score for recent messages', () => {
-    // const action = {type: 'RECEIVED_SCORE_FOR_MESSAGES', score: 0.20};
-    // Reducer(storeReducer).withState(initialState).expect(action).toReturnState({...initialState, scoreData: 0.20});
+    const action = {
+      type: 'RECEIVED_SCORE_FOR_MESSAGES',
+      channel: 1,
+      score: 0.20};
+    Reducer(storeReducer).withState(initialState).expect(action).toReturnState({...initialState, scoreData: {1: 0.20}});
 
 
     //***No action to go with this reducer
   });
 
   it('should store boolean indicating score presence', () => {
-    // const action = {type: 'SHOW_SCORE'};
-    // Reducer(storeReducer).withState(initialState).expect(action).toReturnState({...initialState, isShowingScores: true});
+    const action = {type: 'SHOW_SCORE'};
+    Reducer(storeReducer).withState(initialState).expect(action).toReturnState({...initialState, isShowingScores: true});
 
 
     //***No action to go with this reducer
