@@ -23,7 +23,7 @@ export type State = {
 };
 
 function storeReducer(state: State, action): State {
-  console.log('Action:', action);
+  // console.log('Action:', action);
 
   let newChannelData: ChannelData;
   let newScoreData: {[string]: ?number};
@@ -40,7 +40,7 @@ function storeReducer(state: State, action): State {
         selectedChannel: action.channel,
       };
     case 'RECEIVED_CHANNEL_LIST':
-      newChannelData = {...state.channelData};
+      newChannelData = { ...state.channelData };
       action.channels.forEach((channel) => {
         newChannelData[channel] = newChannelData[channel] || null;
       });
@@ -54,9 +54,9 @@ function storeReducer(state: State, action): State {
         selectedChannel: newSelectedChannel,
       };
     case 'RECEIVED_MESSAGES_FOR_CHANNEL':
-      newChannelData = {...state.channelData};
-      newChannelData[action.channel] = {...newChannelData[action.channel]};
-      Object.keys(action.messages).forEach(id => {
+      newChannelData = { ...state.channelData };
+      newChannelData[action.channel] = { ...newChannelData[action.channel] };
+      Object.keys(action.messages).forEach((id) => {
         newChannelData[action.channel][id] = action.messages[id];
       });
       return {
@@ -65,7 +65,7 @@ function storeReducer(state: State, action): State {
       };
 
     case 'RECEIVED_NEW_SCORE':
-      newScoreData = {...state.scoreData, ...action.scoreData};
+      newScoreData = { ...state.scoreData, ...action.scoreData };
       return {
         ...state,
         isShowingScores: true,
@@ -78,19 +78,18 @@ function storeReducer(state: State, action): State {
       };
 
     case 'RECEIVED_NEW_MESSAGES':
-      console.log('action.messages', action.messages);
-        newChannelData = {...state.channelData};
-        Object.keys(action.messages).forEach(channelId => {
-        newChannelData[channelId] = {...newChannelData[channelId]};
-        Object.keys(action.messages[channelId]).forEach(messageId => {
-            newChannelData[channelId][messageId] = action.messages[channelId][messageId];
-          });
+      newChannelData = { ...state.channelData };
+      Object.keys(action.messages).forEach((channelId) => {
+        newChannelData[channelId] = { ...newChannelData[channelId] };
+        Object.keys(action.messages[channelId]).forEach((messageId) => {
+          newChannelData[channelId][messageId] = action.messages[channelId][messageId];
         });
+      });
 
-        return {
-          ...state,
-          channelData: newChannelData,
-        };
+      return {
+        ...state,
+        channelData: newChannelData,
+      };
 
     default:
       return state;
@@ -111,11 +110,13 @@ const store = createStore(
   ),
 );
 
+/* es-lint-disable-nextline */
 store.subscribe(() => {
   console.log('State: ', store.getState());
 });
 
 // TODO: remove
 window.store = store;
+
 
 export default store;

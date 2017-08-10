@@ -14,7 +14,7 @@ import './index.css';
 import store from './store';
 import Actions from './Actions';
 
-const emojis =
+const sentiments =
   {
     frustrated,
     sad,
@@ -22,6 +22,7 @@ const emojis =
     smile,
     happy,
   };
+
 
 export default class Toolbar extends React.Component {
   componentWillMount() {
@@ -41,8 +42,8 @@ export default class Toolbar extends React.Component {
   render() {
     const { color, score, isShowingScores } = this.props;
     const menuClasses = `ui ${color} inverted menu`;
-
-    const {selectedChannel} = store.getState();
+    const { selectedChannel } = store.getState();
+    const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
 
     return (
       <Menu size="small" className={menuClasses}>
@@ -53,12 +54,13 @@ export default class Toolbar extends React.Component {
           <Dropdown.Menu>
             {Object.keys(store.getState().channelData).map(
               channel =>
-                <Dropdown.Item
+                (<Dropdown.Item
                   key={channel}
                   onClick={() => store.dispatch(Actions.selectChannel(channel))}
-                  selected={channel === selectedChannel}>
+                  selected={channel === selectedChannel}
+                >
                   {channel}
-                </Dropdown.Item>,
+                </Dropdown.Item>),
             )}
           </Dropdown.Menu>
         </Dropdown>
@@ -66,7 +68,7 @@ export default class Toolbar extends React.Component {
           <Menu.Item className="ui button">
             <Image
               avatar
-              src={emojis.neutral}
+              src={sentiments[currentSentiment]}
             />
           </Menu.Item>
         </Menu.Menu>

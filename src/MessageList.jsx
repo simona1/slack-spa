@@ -18,13 +18,13 @@ export default class MessageList extends React.Component {
   }
 
   render() {
-    const {selectedChannel} = this.props;
+    const { selectedChannel } = this.props;
     let messages = store.getState().channelData[this.props.selectedChannel];
     if (!messages) {
       if (selectedChannel) {
         setTimeout(
           () => store.dispatch(Actions.fetchMessagesForChannel(selectedChannel)),
-          0
+          0,
         );
       }
       messages = {};
