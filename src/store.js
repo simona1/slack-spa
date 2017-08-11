@@ -1,6 +1,6 @@
 // @flow
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 export type Id = mixed;
@@ -96,19 +96,34 @@ function storeReducer(state: State, action): State {
   }
 }
 
-const store = createStore(
-  storeReducer,
+// const store = createStore(
+//   storeReducer,
+//   {
+//     isShowingScores: false,
+//     isConnectedWithSlack: false,
+//     channelData: {},
+//     scoreData: {},
+//     selectedChannel: null,
+//   },
+//   applyMiddleware(
+//     thunkMiddleware,
+//   ),
+// );
+
+/* eslint-disable */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
+const store = createStore(storeReducer,
   {
     isShowingScores: false,
     isConnectedWithSlack: false,
     channelData: {},
     scoreData: {},
     selectedChannel: null,
-  },
-  applyMiddleware(
-    thunkMiddleware,
-  ),
-);
+  }, composeEnhancers(
+    applyMiddleware(thunkMiddleware),
+  ));
+
 
 /* eslint-disable */
 store.subscribe(() => {
@@ -117,6 +132,5 @@ store.subscribe(() => {
 
 // TODO: remove
 window.store = store;
-
 
 export default store;
