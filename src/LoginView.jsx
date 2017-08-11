@@ -13,7 +13,7 @@ import store from './store';
 import Actions from './Actions';
 
 export function LoginView(props) {
-  console.log(props)
+  //console.log(props)
   const {connectWithSlack} = props;
   return (
     <div>

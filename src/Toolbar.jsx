@@ -2,7 +2,7 @@
 
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import slack from './images/slackIcon.png';
 import frustrated from './images/emojis/frustrated.jpg';
@@ -13,7 +13,7 @@ import smile from './images/emojis/smile.jpg';
 import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
 
 import './index.css';
-import store from './store';
+// import store from './store';
 import Actions from './Actions';
 
 const sentiments =
@@ -28,11 +28,10 @@ const sentiments =
 
 export class Toolbar extends React.Component {
   componentWillMount() {
-    const channels = Object.keys(store.getState().channelData);
+    const channels = Object.keys(this.props.channelData);
     if (channels.length === 0) {
-      store.dispatch(Actions.fetchChannels());
+      this.props.fetchChannels()
     }
-    store.subscribe(() => this.forceUpdate());
   }
 
   props: {
@@ -42,7 +41,7 @@ export class Toolbar extends React.Component {
   };
 
   render() {
-    const { score, selectedChannel, channelData } = this.props;
+    const { score, selectedChannel, channelData, selectChannel } = this.props;
     console.log(score);
     //const { selectedChannel } = store.getState();
     const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
@@ -60,7 +59,7 @@ export class Toolbar extends React.Component {
               channel =>
                 (<Dropdown.Item
                   key={channel}
-                  onClick={() => store.dispatch(Actions.selectChannel(channel))}
+                  onClick={() => selectChannel(channel)}
                   selected={channel === selectedChannel}
                 >
                   {channel}
@@ -89,9 +88,9 @@ const mapStateToProps = (state, ownProps) => {
 
   }
 };
-const selectChannel = Actions.selectChannel;
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({selectChannel}, dispatch);
-
+const mapDispatchToProps = (dispatch) =>{
+const {selectChannel, fetchChannels} = Actions;
+  return bindActionCreators({selectChannel, fetchChannels}, dispatch);
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar)
