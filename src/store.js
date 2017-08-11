@@ -15,7 +15,7 @@ export type MessageType = {
 type ChannelData = {[string]: ?{[Id]: {[Id]: MessageType}}};
 
 export type State = {
-  isShowingScores: boolean,
+  //isShowingScores: boolean,
   isConnectedWithSlack: boolean,
   channelData: ChannelData,
   scoreData: {[string]: ?number},

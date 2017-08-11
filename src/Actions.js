@@ -1,8 +1,6 @@
 // @flow
 
 import type { State, MessageType, Id } from './store';
-// import fakeMessages from './messages.json';
-
 type Dispatch = ({ type: string }) => void;
 type GetState = () => State;
 

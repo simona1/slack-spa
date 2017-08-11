@@ -2,24 +2,28 @@
 
 import React from 'react';
 import { List } from 'semantic-ui-react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import Message from './Message';
 import owl from './images/avatars/owl.png';
 
 import store from './store';
 import Actions from './Actions';
 
-export default class MessageList extends React.Component {
+export class MessageList extends React.Component {
   componentWillMount() {
     store.subscribe(() => this.forceUpdate());
   }
 
   props: {
     selectedChannel: ?string,
+    messages: {},
   }
 
   render() {
     const { selectedChannel } = this.props;
-    let messages = store.getState().channelData[this.props.selectedChannel];
+    let { messages } = this.props;
+    //let messages = store.getState().channelData[this.props.selectedChannel];
     if (!messages) {
       if (selectedChannel) {
         setTimeout(
@@ -50,3 +54,18 @@ export default class MessageList extends React.Component {
     );
   }
 }
+
+export const mapStateToProps = (state, ownProps) => {
+  let messages = state.channelData[state.selectedChannel];
+  return {
+    messages,
+    selectedChannel: state.selectedChannel,
+    //currentScore,
+  }
+};
+
+const fetchMessagesForChannel = Actions.fetchMessagesForChannel;
+export const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({fetchMessagesForChannel}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageList)

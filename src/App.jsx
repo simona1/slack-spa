@@ -50,9 +50,10 @@ class App extends Component {
 
 export const mapStateToProps = (state, ownProps) => {
   const currentScore = state.scoreData[state.selectedChannel] || 0.01;
+  const messages = state.channelData[state.selectedChannel] || {};
   return {
     //isShowingScores: state.isShowingScores,
-    messages: state.messages,
+    messages,
     score: state.score,
     selectedChannel: state.selectedChannel,
     isConnectedWithSlack: state.isConnectedWithSlack,

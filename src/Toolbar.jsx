@@ -2,7 +2,8 @@
 
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
-import {connect } from 'react-redux'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import slack from './images/slackIcon.png';
 import frustrated from './images/emojis/frustrated.jpg';
 import sad from './images/emojis/sad.jpg';
@@ -41,7 +42,7 @@ export class Toolbar extends React.Component {
   };
 
   render() {
-    const { score, isShowingScores, selectedChannel, channelData } = this.props;
+    const { score, selectedChannel, channelData } = this.props;
     console.log(score);
     //const { selectedChannel } = store.getState();
     const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
@@ -81,7 +82,6 @@ export class Toolbar extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-
   return {
     selectedChannel: state.selectedChannel,
     score: state.scoreData[state.selectedChannel],
@@ -89,5 +89,9 @@ const mapStateToProps = (state, ownProps) => {
 
   }
 };
+const selectChannel = Actions.selectChannel;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({selectChannel}, dispatch);
 
-export default connect(mapStateToProps)(Toolbar)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar)

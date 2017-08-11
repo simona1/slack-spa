@@ -21,3 +21,18 @@ export default function Message(
     </List.Item>
   );
 }
+
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     selectedChannel: state.selectedChannel,
+//     score: state.scoreData[state.selectedChannel],
+//     channelData: state.channelData,
+//
+//   }
+// };
+// const selectChannel = Actions.selectChannel;
+// const mapDispatchToProps = (dispatch) =>
+//   bindActionCreators({selectChannel}, dispatch);
+//
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(Message)
