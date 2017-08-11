@@ -26,7 +26,7 @@ exports[`Renders message with default props should render a message when given p
         <Image
           as="img"
           avatar={true}
-          src="slack_icon.png"
+          src="slackIcon.png"
           ui={true}
         />
         Connect with Slack

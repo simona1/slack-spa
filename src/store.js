@@ -110,7 +110,7 @@ const store = createStore(
   ),
 );
 
-/* es-lint-disable-nextline */
+/* eslint-disable */
 store.subscribe(() => {
   console.log('State: ', store.getState());
 });
