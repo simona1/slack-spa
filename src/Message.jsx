@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Image, List } from 'semantic-ui-react';
-import MessageType from './store';
+import type { MessageType } from './store';
 
 export default function Message(
   { avatarImage, name, text, timestamp }: MessageType,

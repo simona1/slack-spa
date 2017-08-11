@@ -28,23 +28,26 @@ function storeReducer(state: State, action): State {
   let newChannelData: ChannelData;
   let newScoreData: {[string]: ?number};
 
+  let newSelectedChannel;
   switch (action.type) {
     case 'CONNECTED_WITH_SLACK':
       return {
         ...state,
         isConnectedWithSlack: true,
       };
+
     case 'SELECT_CHANNEL':
       return {
         ...state,
         selectedChannel: action.channel,
       };
+
     case 'RECEIVED_CHANNEL_LIST':
       newChannelData = { ...state.channelData };
       action.channels.forEach((channel) => {
         newChannelData[channel] = newChannelData[channel] || null;
       });
-      let newSelectedChannel = state.selectedChannel;
+      newSelectedChannel = state.selectedChannel;
       if (!newSelectedChannel) {
         newSelectedChannel = action.channels[0];
       }
@@ -112,10 +115,9 @@ function storeReducer(state: State, action): State {
 
 /* eslint-disable */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-/* eslint-enable */
 const store = createStore(storeReducer,
   {
-    isShowingScores: false,
+    isShowingScores: false,   // will need this later
     isConnectedWithSlack: false,
     channelData: {},
     scoreData: {},

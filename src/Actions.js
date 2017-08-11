@@ -1,18 +1,18 @@
 // @flow
 
-import type { State } from './store';
-import fakeMessages from './messages.json';
+import type { State, MessageType, Id } from './store';
+// import fakeMessages from './messages.json';
 
-type Dispatch = ({type: string}) => void;
+type Dispatch = ({ type: string }) => void;
 type GetState = () => State;
 
-function fakePromise(data, delay) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(data), delay || 2000);
-  });
+// const PATH = 'https://databraid.localtunnel.me';
+const PATH = 'http://localhost:4000/';
+
+function fetchRequest(path, method = 'GET') {
+  return fetch(path);
 }
 
-// TODO: alphabetize actions
 const Actions = {
   connectWithSlack() {
     return {
@@ -22,27 +22,13 @@ const Actions = {
 
   fetchChannels() {
     return async function (dispatch: Dispatch) {
-      // TODO: replace with real Api call
-      const channels = await fakePromise(['#random', '#general', '#redux']);
+      const response = await fetchRequest(`${PATH}channels`);
+      const channels = await response.json();
+      console.log(channels);
       dispatch({
         channels,
         type: 'RECEIVED_CHANNEL_LIST',
       });
-    };
-  },
-
-  processNewScores(scoreData: {[string]: number}) {
-    return {
-      scoreData,
-      type: 'RECEIVED_NEW_SCORE',
-    };
-  },
-
-  processNewMessages(newMessageData: {}) {
-    // Mark that we have messages to avoid fetching multiple times.
-    return {
-      messages: newMessageData,
-      type: 'RECEIVED_NEW_MESSAGES',
     };
   },
 
@@ -53,7 +39,6 @@ const Actions = {
         // Don't fetch again if we already have messages.
         return;
       }
-
       // Mark that we have messages to avoid fetching multiple times.
       dispatch({
         channel,
@@ -61,42 +46,38 @@ const Actions = {
         type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
       });
 
-      let messages = fakeMessages;
-
-      switch (channel) {
-        case '#random':
-          messages = {
-            X12345: {
-              id: 'X12345',
-              text: 'Make it so!',
-              avatarImage: 'Picard',
-              name: 'Captain Picard',
-              timestamp: '2017-08-01',
-            },
-          };
-          break;
-        case '#general':
-          messages = fakeMessages;
-          break;
-        case '#redux':
-          messages = fakeMessages;
-          break;
-        default:
-          return;
-      }
-
       // TODO: replace with real Api call
-      messages = await fakePromise(messages);
+      fetch('http://localhost:4000/messages');
 
-      dispatch({
-        channel,
-        messages,
-        type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
-      });
+      /*      dispatch({
+      channel,
+      messages,
+      type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
+    }); */
+    };
+  },
+
+  processNewMessages(newMessageData: {[string]: ?{[Id]: {[Id]: MessageType}}}) {
+    // Mark that we have messages to avoid fetching multiple times.
+    return {
+      messages: newMessageData,
+      type: 'RECEIVED_NEW_MESSAGES',
+    };
+  },
+
+  processNewScores(scoreData: {[string]: number}) {
+    return {
+      scoreData,
+      type: 'RECEIVED_NEW_SCORE',
     };
   },
 
   selectChannel(channel: string) {
+    if (Math.random() > 0.5) {
+      fetch('http://localhost:4000/score/happy');
+    } else {
+      fetch('http://localhost:4000/score/sad');
+    }
     return {
       channel,
       type: 'SELECT_CHANNEL',
