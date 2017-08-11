@@ -99,20 +99,6 @@ function storeReducer(state: State, action): State {
   }
 }
 
-// const store = createStore(
-//   storeReducer,
-//   {
-//     isShowingScores: false,
-//     isConnectedWithSlack: false,
-//     channelData: {},
-//     scoreData: {},
-//     selectedChannel: null,
-//   },
-//   applyMiddleware(
-//     thunkMiddleware,
-//   ),
-// );
-
 /* eslint-disable */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(storeReducer,

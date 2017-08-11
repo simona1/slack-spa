@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
-import actions from './Actions';
+import {processNewScores, processNewMessages} from './Actions';
 import store from './store';
 
 import App from './App';
@@ -23,9 +23,9 @@ const socket = openSocket('http://localhost:4000');
 
 
 socket.on('messages', (messages) => {
-  store.dispatch(actions.processNewMessages(messages));
+  store.dispatch(processNewMessages(messages));
 });
 
 socket.on('score', (scoreData) => {
-  store.dispatch(actions.processNewScores(scoreData));
+  store.dispatch(processNewScores(scoreData));
 });

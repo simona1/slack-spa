@@ -8,7 +8,7 @@ import Message from './Message';
 import owl from './images/avatars/owl.png';
 
 import store from './store';
-import Actions from './Actions';
+import {fetchMessagesForChannel} from './Actions';
 
 export class MessageList extends React.Component {
   componentWillMount() {
@@ -27,7 +27,7 @@ export class MessageList extends React.Component {
     if (!messages) {
       if (selectedChannel) {
         setTimeout(
-          () => store.dispatch(Actions.fetchMessagesForChannel(selectedChannel)),
+          () => fetchMessagesForChannel(selectedChannel),
           0,
         );
       }
@@ -64,7 +64,7 @@ export const mapStateToProps = (state, ownProps) => {
   }
 };
 
-const fetchMessagesForChannel = Actions.fetchMessagesForChannel;
+//const fetchMessagesForChannel = Actions.fetchMessagesForChannel;
 export const mapDispatchToProps = (dispatch) =>
   bindActionCreators({fetchMessagesForChannel}, dispatch);
 

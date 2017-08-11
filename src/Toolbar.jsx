@@ -15,6 +15,7 @@ import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
 import './index.css';
 // import store from './store';
 import Actions from './Actions';
+import {selectChannel, fetchChannels} from './Actions';
 
 const sentiments =
   {
@@ -89,7 +90,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 const mapDispatchToProps = (dispatch) =>{
-const {selectChannel, fetchChannels} = Actions;
+
   return bindActionCreators({selectChannel, fetchChannels}, dispatch);
 }
 

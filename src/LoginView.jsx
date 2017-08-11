@@ -10,7 +10,7 @@ import logo from './images/slack-logo.png';
 import slack from './images/slackIcon.png';
 
 import store from './store';
-import Actions from './Actions';
+import {connectWithSlack} from './Actions';
 
 export function LoginView(props) {
   //console.log(props)
@@ -40,7 +40,7 @@ export function LoginView(props) {
 }
 
 export const mapDispatchToProps = (dispatch) => {
-  const {connectWithSlack} = Actions;
+  //const {connectWithSlack} = Actions;
   return bindActionCreators({connectWithSlack}, dispatch);
 }
 
