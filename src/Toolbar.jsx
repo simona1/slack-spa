@@ -2,6 +2,7 @@
 
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
+import {connect } from 'react-redux'
 import slack from './images/slackIcon.png';
 import frustrated from './images/emojis/frustrated.jpg';
 import sad from './images/emojis/sad.jpg';
@@ -24,7 +25,7 @@ const sentiments =
   };
 
 
-export default class Toolbar extends React.Component {
+export class Toolbar extends React.Component {
   componentWillMount() {
     const channels = Object.keys(store.getState().channelData);
     if (channels.length === 0) {
@@ -34,16 +35,18 @@ export default class Toolbar extends React.Component {
   }
 
   props: {
-    color: string,
+    //color: string,
     isShowingScores: boolean,
     score: mixed,
   };
 
   render() {
-    const { color, score, isShowingScores } = this.props;
-    const menuClasses = `ui ${color} inverted menu`;
-    const { selectedChannel } = store.getState();
+    const { score, isShowingScores, selectedChannel, channelData } = this.props;
+    console.log(score);
+    //const { selectedChannel } = store.getState();
     const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
+    const computedColor = convertScoreToColorAndEmoji(score).color;
+    const menuClasses = `ui ${computedColor} inverted menu`;
 
     return (
       <Menu size="small" className={menuClasses}>
@@ -52,7 +55,7 @@ export default class Toolbar extends React.Component {
         </Menu.Item>
         <Dropdown item text={selectedChannel || 'Select a channel'}>
           <Dropdown.Menu>
-            {Object.keys(store.getState().channelData).map(
+            {Object.keys(channelData).map(
               channel =>
                 (<Dropdown.Item
                   key={channel}
@@ -76,3 +79,15 @@ export default class Toolbar extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+
+  return {
+    selectedChannel: state.selectedChannel,
+    score: state.scoreData[state.selectedChannel],
+    channelData: state.channelData,
+
+  }
+};
+
+export default connect(mapStateToProps)(Toolbar)

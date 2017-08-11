@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
 import actions from './Actions';
 import store from './store';
@@ -10,7 +11,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  React.createElement(App),
+  React.createElement(Provider, {store},
+    React.createElement(App),
+  ),
   document.getElementById('root'),
 );
 registerServiceWorker();
