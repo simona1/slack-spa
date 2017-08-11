@@ -31,17 +31,6 @@ const Actions = {
     };
   },
 
-  fetchScores() {
-    return async function (dispatch: Dispatch) {
-      // TODO: replace with real Api call
-      const scores = await fakePromise({ '#random': 0, '#general': 0.5, '#redux': -0.2 });
-      dispatch({
-        scores,
-        type: 'RECEIVED_CHANNEL_LIST',
-      });
-    };
-  },
-
   processNewScores(scoreData: {[string]: number}) {
     return {
       scoreData,

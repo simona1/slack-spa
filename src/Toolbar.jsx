@@ -2,7 +2,7 @@
 
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
-import slack from './images/slack_icon.png';
+import slack from './images/slackIcon.png';
 import frustrated from './images/emojis/frustrated.jpg';
 import sad from './images/emojis/sad.jpg';
 import neutral from './images/emojis/neutral.jpg';
