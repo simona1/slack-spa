@@ -11,7 +11,7 @@ exports[`Renders toolbar should render a toolbar 1`] = `
     <Image
       as="img"
       avatar={true}
-      src="slack_icon.png"
+      src="slackIcon.png"
       ui={true}
     />
   </MenuItem>

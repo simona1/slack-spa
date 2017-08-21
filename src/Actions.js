@@ -1,118 +1,83 @@
 // @flow
 
-import type { State } from './store';
-import fakeMessages from './messages.json';
-
-type Dispatch = ({type: string}) => void;
+import type { State, MessageType, Id } from './store';
+type Dispatch = ({ type: string }) => void;
 type GetState = () => State;
 
-function fakePromise(data, delay) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(data), delay || 2000);
-  });
+// const PATH = 'https://databraid.localtunnel.me';
+const PATH = 'http://localhost:4000/';
+
+function fetchRequest(path, method = 'GET') {
+  return fetch(path);
 }
 
-// TODO: alphabetize actions
-const Actions = {
-  connectWithSlack() {
-    return {
-      type: 'CONNECTED_WITH_SLACK',
-    };
-  },
 
-  fetchChannels() {
-    return async function (dispatch: Dispatch) {
-      // TODO: replace with real Api call
-      const channels = await fakePromise(['#random', '#general', '#redux']);
-      dispatch({
-        channels,
-        type: 'RECEIVED_CHANNEL_LIST',
-      });
-    };
-  },
+export function connectWithSlack() {
+  return {
+    type: 'CONNECTED_WITH_SLACK',
+  };
+}
 
-  fetchScores() {
-    return async function (dispatch: Dispatch) {
-      // TODO: replace with real Api call
-      const scores = await fakePromise({ '#random': 0, '#general': 0.5, '#redux': -0.2 });
-      dispatch({
-        scores,
-        type: 'RECEIVED_CHANNEL_LIST',
-      });
-    };
-  },
+export function fetchChannels() {
+  return async function (dispatch: Dispatch) {
+    const response = await fetchRequest(`${PATH}channels`);
+    const channels = await response.json();
+    console.log(channels);
+    dispatch({
+      channels,
+      type: 'RECEIVED_CHANNEL_LIST',
+    });
+  };
+}
 
-  processNewScores(scoreData: {[string]: number}) {
-    return {
-      scoreData,
-      type: 'RECEIVED_NEW_SCORE',
-    };
-  },
-
-  processNewMessages(newMessageData: {}) {
-  // Mark that we have messages to avoid fetching multiple times.
-    return {
-      messages: newMessageData,
-      type: 'RECEIVED_NEW_MESSAGES',
-    };
-  },
-
-  fetchMessagesForChannel(channel: string) {
-    return async function (dispatch: Dispatch, getState: GetState) {
-      const oldMessages = getState().channelData[channel];
-      if (oldMessages) {
-        // Don't fetch again if we already have messages.
-        return;
-      }
-
-      // Mark that we have messages to avoid fetching multiple times.
-      dispatch({
-        channel,
-        messages: {},
-        type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
-      });
-
-      let messages = fakeMessages;
-
-      switch (channel) {
-        case '#random':
-          messages = {
-            X12345: {
-              id: 'X12345',
-              text: 'Make it so!',
-              avatarImage: 'Picard',
-              name: 'Captain Picard',
-              timestamp: '2017-08-01',
-            },
-          };
-          break;
-        case '#general':
-          messages = fakeMessages;
-          break;
-        case '#redux':
-          messages = fakeMessages;
-          break;
-        default:
-          return;
-      }
-
-      // TODO: replace with real Api call
-      messages = await fakePromise(messages);
-
-      dispatch({
-        channel,
-        messages,
-        type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
-      });
-    };
-  },
-
-  selectChannel(channel: string) {
-    return {
+export function fetchMessagesForChannel(channel: string) {
+  return async function (dispatch: Dispatch, getState: GetState) {
+    const oldMessages = getState().channelData[channel];
+    if (oldMessages) {
+      // Don't fetch again if we already have messages.
+      return;
+    }
+    // Mark that we have messages to avoid fetching multiple times.
+    dispatch({
       channel,
-      type: 'SELECT_CHANNEL',
-    };
-  },
-};
+      messages: {},
+      type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
+    });
 
-export default Actions;
+    // TODO: replace with real Api call
+    fetch('http://localhost:4000/messages');
+
+    /*      dispatch({
+    channel,
+    messages,
+    type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
+  }); */
+  };
+}
+
+export function processNewMessages(newMessageData: {[string]: ?{[Id]: {[Id]: MessageType}}}) {
+  // Mark that we have messages to avoid fetching multiple times.
+  return {
+    messages: newMessageData,
+    type: 'RECEIVED_NEW_MESSAGES',
+  };
+}
+
+export function processNewScores(scoreData: {[string]: number}) {
+  return {
+    scoreData,
+    type: 'RECEIVED_NEW_SCORE',
+  };
+}
+
+export function selectChannel(channel: string) {
+  if (Math.random() > 0.5) {
+    fetch('http://localhost:4000/score/happy');
+  } else {
+    fetch('http://localhost:4000/score/sad');
+  }
+  return {
+    channel,
+    type: 'SELECT_CHANNEL',
+  };
+}
