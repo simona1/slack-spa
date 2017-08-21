@@ -4,7 +4,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
-import { selectChannel, fetchChannels } from '../Actions/index.js';
+import { selectChannel, fetchChannels } from '../Actions/index';
 import convertScoreToColorAndEmoji from '../Utils/convertScoreToColorAndEmoji';
 import frustrated from '../images/emojis/frustrated.jpg';
 import happy from '../images/emojis/happy.jpg';
@@ -39,7 +39,6 @@ export class Toolbar extends React.Component {
 
   render() {
     const { score, selectedChannel, channelData, selectChannel } = this.props;
-    console.log(score);
     const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
     const computedColor = convertScoreToColorAndEmoji(score).color;
     const menuClasses = `ui ${computedColor} inverted menu`;
@@ -76,12 +75,15 @@ export class Toolbar extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   selectedChannel: state.selectedChannel,
   score: state.scoreData[state.selectedChannel],
   channelData: state.channelData,
 
 });
-const mapDispatchToProps = dispatch => bindActionCreators({ selectChannel, fetchChannels }, dispatch);
+const mapDispatchToProps = dispatch =>
+bindActionCreators({
+  selectChannel, fetchChannels,
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

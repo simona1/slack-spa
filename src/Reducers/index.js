@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-import { CONNECTED_WITH_SLACK, RECEIVED_CHANNEL_LIST, RECEIVED_MESSAGES_FOR_CHANNEL, RECEIVED_NEW_MESSAGES, RECEIVED_NEW_SCORE, SELECT_CHANNEL } from '../Actions/index.js';
+import { CONNECTED_WITH_SLACK, RECEIVED_CHANNEL_LIST, RECEIVED_MESSAGES_FOR_CHANNEL, RECEIVED_NEW_MESSAGES, RECEIVED_NEW_SCORE, SELECT_CHANNEL } from '../Actions/index';
 
 export default function storeReducer(state: State, action): State {
   let newChannelData: ChannelData;

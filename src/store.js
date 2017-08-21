@@ -2,26 +2,7 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import storeReducer from './Reducers/index.js';
-
-export type Id = mixed;
-
-export type MessageType = {
-  avatarImage: string,
-  name: string,
-  text: string,
-  timestamp: string,
-};
-
-type ChannelData = {[string]: ?{[Id]: {[Id]: MessageType}}};
-
-export type State = {
-  // isShowingScores: boolean,
-  isConnectedWithSlack: boolean,
-  channelData: ChannelData,
-  scoreData: {[string]: ?number},
-  selectedChannel: ?string,
-};
+import storeReducer from './Reducers/index';
 
 /* eslint-disable */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

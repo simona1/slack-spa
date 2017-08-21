@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginView from './Components/LoginView';
-import MessageList from './Components/MessageList.jsx';
+import MessageList from './Components/MessageList';
 import Toolbar from './Components/Toolbar';
 import convertScoreToColorAndEmoji from './Utils/convertScoreToColorAndEmoji';
 import './App.css';

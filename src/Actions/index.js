@@ -1,19 +1,27 @@
 // @flow
 
-import type { State, MessageType, Id } from './store';
+import type { State, MessageType, Id } from '../FlowTypes/Types';
+
 type Dispatch = ({ type: string }) => void;
 type GetState = () => State;
 
 // const PATH = 'https://databraid.localtunnel.me';
 const PATH = 'http://localhost:4000/';
 
-function fetchRequest(path, method = 'GET') {
+export const CONNECTED_WITH_SLACK = 'CONNECTED_WITH_SLACK';
+export const RECEIVED_CHANNEL_LIST = 'RECEIVED_CHANNEL_LIST';
+export const RECEIVED_MESSAGES_FOR_CHANNEL = 'RECEIVED_MESSAGES_FOR_CHANNEL';
+export const RECEIVED_NEW_MESSAGES = 'RECEIVED_NEW_MESSAGES';
+export const RECEIVED_NEW_SCORE = 'RECEIVED_NEW_SCORE';
+export const SELECT_CHANNEL = 'SELECT_CHANNEL';
+
+function fetchRequest(path) {
   return fetch(path);
 }
 
 export function connectWithSlack() {
   return {
-    type: 'CONNECTED_WITH_SLACK',
+    type: CONNECTED_WITH_SLACK,
   };
 }
 
@@ -21,7 +29,6 @@ export function fetchChannels() {
   return async function (dispatch: Dispatch) {
     const response = await fetchRequest(`${PATH}channels`);
     const channels = await response.json();
-    console.log(channels);
     dispatch({
       channels,
       type: 'RECEIVED_CHANNEL_LIST',
@@ -30,7 +37,7 @@ export function fetchChannels() {
 }
 
 export function fetchMessagesForChannel(channel: string) {
-  return async function (dispatch: Dispatch, getState: GetState) {
+  return async function(dispatch: Dispatch, getState: GetState) {
     const oldMessages = getState().channelData[channel];
     if (oldMessages) {
       // Don't fetch again if we already have messages.
@@ -80,10 +87,3 @@ export function selectChannel(channel: string) {
     type: 'SELECT_CHANNEL',
   };
 }
-
-export const CONNECTED_WITH_SLACK = 'CONNECTED_WITH_SLACK';
-export const RECEIVED_CHANNEL_LIST = 'RECEIVED_CHANNEL_LIST';
-export const RECEIVED_MESSAGES_FOR_CHANNEL = 'RECEIVED_MESSAGES_FOR_CHANNEL';
-export const RECEIVED_NEW_MESSAGES = 'RECEIVED_NEW_MESSAGES';
-export const RECEIVED_NEW_SCORE = 'RECEIVED_NEW_SCORE';
-export const SELECT_CHANNEL = 'SELECT_CHANNEL';

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import Message from './Message';
 import owl from '../images/avatars/owl.png';
 
-import { fetchMessagesForChannel } from '../Actions/index.js';
+import { fetchMessagesForChannel } from '../Actions/index';
 
 export class MessageList extends React.Component {
 

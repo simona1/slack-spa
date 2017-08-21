@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import openSocket from 'socket.io-client';
-import { processNewScores, processNewMessages } from './Actions/index.js';
+import { processNewScores, processNewMessages } from './Actions/index';
 import store from './store';
 
 import App from './App';
