@@ -1,7 +1,6 @@
 // @flow
 
 import type { State, MessageType, Id } from './store';
-
 type Dispatch = ({ type: string }) => void;
 type GetState = () => State;
 

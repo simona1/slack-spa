@@ -16,16 +16,9 @@ import store from './store';
 //   // const messages = ...;
 
 class App extends Component {
-  componentWillMount() {
-    store.subscribe(() => this.forceUpdate());
-  }
 
   render() {
-    const {isConnectedWithSlack, currentScore, selectedChannel} = this.props;
-    //const state = this.props;
-    //const currentScore = state.scoreData[state.selectedChannel] || 0.01;
-    // const computedColor = convertScoreToColorAndEmoji(currentScore).color;
-    // const computedEmoji = convertScoreToColorAndEmoji(currentScore).emoji;
+    const { isConnectedWithSlack, currentScore, selectedChannel } = this.props;
 
     if (!isConnectedWithSlack) {
       return <LoginView />;
@@ -34,11 +27,7 @@ class App extends Component {
     return (
       <div>
         <div>
-          <Toolbar
-            // color={computedColor}
-            //score={currentScore}
-            //isShowingScores={false}
-          />
+          <Toolbar />
         </div>
         <div className="listColor">
           <MessageList selectedChannel={selectedChannel} />
@@ -52,15 +41,14 @@ export const mapStateToProps = (state, ownProps) => {
   const currentScore = state.scoreData[state.selectedChannel] || 0.01;
   const messages = state.channelData[state.selectedChannel] || {};
   return {
-    //isShowingScores: state.isShowingScores,
+    // isShowingScores: state.isShowingScores,
     messages,
     score: state.score,
     selectedChannel: state.selectedChannel,
     isConnectedWithSlack: state.isConnectedWithSlack,
     // slackSession: state.slackSession,
     currentScore,
-  }
   };
-
+};
 
 export default connect(mapStateToProps)(App);

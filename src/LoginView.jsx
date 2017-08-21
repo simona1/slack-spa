@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button, Image } from 'semantic-ui-react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import logo from './images/slack-logo.png';
@@ -10,11 +10,11 @@ import logo from './images/slack-logo.png';
 import slack from './images/slackIcon.png';
 
 import store from './store';
-import {connectWithSlack} from './Actions';
+import { connectWithSlack } from './Actions/index.js';
 
 export function LoginView(props) {
-  //console.log(props)
-  const {connectWithSlack} = props;
+  // console.log(props)
+  const { connectWithSlack } = props;
   return (
     <div>
       <div className="SlackApp">
@@ -39,9 +39,7 @@ export function LoginView(props) {
   );
 }
 
-export const mapDispatchToProps = (dispatch) => {
-  //const {connectWithSlack} = Actions;
-  return bindActionCreators({connectWithSlack}, dispatch);
-}
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators({ connectWithSlack }, dispatch);
 
 export default connect(null, mapDispatchToProps)(LoginView);

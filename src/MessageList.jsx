@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { List } from 'semantic-ui-react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Message from './Message';
 import owl from './images/avatars/owl.png';
 
 import store from './store';
-import {fetchMessagesForChannel} from './Actions';
+import { fetchMessagesForChannel } from './Actions/index.js';
 
 export class MessageList extends React.Component {
   componentWillMount() {
@@ -23,7 +23,7 @@ export class MessageList extends React.Component {
   render() {
     const { selectedChannel } = this.props;
     let { messages } = this.props;
-    //let messages = store.getState().channelData[this.props.selectedChannel];
+    // let messages = store.getState().channelData[this.props.selectedChannel];
     if (!messages) {
       if (selectedChannel) {
         setTimeout(
@@ -56,16 +56,16 @@ export class MessageList extends React.Component {
 }
 
 export const mapStateToProps = (state, ownProps) => {
-  let messages = state.channelData[state.selectedChannel];
+  const messages = state.channelData[state.selectedChannel];
   return {
     messages,
     selectedChannel: state.selectedChannel,
-    //currentScore,
-  }
+    // currentScore,
+  };
 };
 
-//const fetchMessagesForChannel = Actions.fetchMessagesForChannel;
-export const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({fetchMessagesForChannel}, dispatch);
+// const fetchMessagesForChannel = Actions.fetchMessagesForChannel;
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators({ fetchMessagesForChannel }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageList)
+export default connect(mapStateToProps, mapDispatchToProps)(MessageList);

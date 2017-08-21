@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import { Thunk } from 'redux-testkit';
 import toJson from 'enzyme-to-json';
 import React from 'react';
-import Actions from '../Actions.js';
+import Actions from '../Actions/index.js';
 
 // connectWithSlack  \,
 // fetchChannels \,
@@ -10,7 +10,7 @@ import Actions from '../Actions.js';
 // fetchMessagesForChannel
 // selectChannel \,
 
-//Why aren't there dispatches for connectWithSlack, processNewMessages, and selectChannel?
+// Why aren't there dispatches for connectWithSlack, processNewMessages, and selectChannel?
 
 function fakePromise(data, delay) {
   return new Promise((resolve, reject) => {
@@ -19,7 +19,6 @@ function fakePromise(data, delay) {
 }
 
 describe('Actions', () => {
-
   it('should return an action object from changeSubject', () => {
     const action = Actions.connectWithSlack();
     expect(action).toEqual({
@@ -45,7 +44,7 @@ describe('Actions', () => {
       },
       1: {
         2: 'Here is another new message',
-      }
+      },
     };
 
     const expectedAction = {
@@ -67,11 +66,11 @@ describe('Actions', () => {
     // });
 
 
-    //I don't understand what's supposed to be happening in this action???
+    // I don't understand what's supposed to be happening in this action???
   });
 
   it('should return an action object from selectChannel', () => {
-    const channel =  "general";
+    const channel = 'general';
 
     const expectedAction = {
       channel,
