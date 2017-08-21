@@ -4,13 +4,10 @@ import React from 'react';
 import { Button, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import logo from './images/slack-logo.png';
+import logo from '../images/slack-logo.png';
 // import slackConnectHref from './connectWithSlackHref';
-import slack from './images/slackIcon.png';
-
-import store from './store';
-import { connectWithSlack } from './Actions/index.js';
+import slack from '../images/slackIcon.png';
+import { connectWithSlack } from '../Actions/index.js';
 
 export function LoginView(props) {
   // console.log(props)

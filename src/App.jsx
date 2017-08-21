@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LoginView from './LoginView';
-import MessageList from './MessageList';
-import Toolbar from './Toolbar';
+import LoginView from './Components/LoginView';
+import MessageList from './Components/MessageList.jsx';
+import Toolbar from './Components/Toolbar';
 import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
 import './App.css';
 import store from './store';

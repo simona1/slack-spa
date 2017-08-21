@@ -4,15 +4,15 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
-import { selectChannel, fetchChannels } from './Actions/index.js';
-import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
-import frustrated from './images/emojis/frustrated.jpg';
-import happy from './images/emojis/happy.jpg';
-import neutral from './images/emojis/neutral.jpg';
-import sad from './images/emojis/sad.jpg';
-import slack from './images/slackIcon.png';
-import smile from './images/emojis/smile.jpg';
-import './index.css';
+import { selectChannel, fetchChannels } from '../Actions/index.js';
+import convertScoreToColorAndEmoji from '../convertScoreToColorAndEmoji';
+import frustrated from '../images/emojis/frustrated.jpg';
+import happy from '../images/emojis/happy.jpg';
+import neutral from '../images/emojis/neutral.jpg';
+import sad from '../images/emojis/sad.jpg';
+import slack from '../images/slackIcon.png';
+import smile from '../images/emojis/smile.jpg';
+import '../index.css';
 
 const sentiments =
   {
@@ -22,7 +22,6 @@ const sentiments =
     smile,
     happy,
   };
-
 
 export class Toolbar extends React.Component {
   componentWillMount() {

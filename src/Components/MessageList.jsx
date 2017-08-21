@@ -5,15 +5,11 @@ import { List } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Message from './Message';
-import owl from './images/avatars/owl.png';
+import owl from '../images/avatars/owl.png';
 
-import store from './store';
-import { fetchMessagesForChannel } from './Actions/index.js';
+import { fetchMessagesForChannel } from '../Actions/index.js';
 
 export class MessageList extends React.Component {
-  componentWillMount() {
-    store.subscribe(() => this.forceUpdate());
-  }
 
   props: {
     selectedChannel: ?string,
