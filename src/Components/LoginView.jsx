@@ -5,7 +5,7 @@ import { Button, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import logo from '../images/slack-logo.png';
-// import slackConnectHref from './connectWithSlackHref';
+//import slackConnectHref from '../Constants/connectWithSlackHref';
 import slack from '../images/slackIcon.png';
 import { connectWithSlack } from '../Actions/index.js';
 

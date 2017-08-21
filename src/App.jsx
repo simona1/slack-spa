@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import LoginView from './Components/LoginView';
 import MessageList from './Components/MessageList.jsx';
 import Toolbar from './Components/Toolbar';
-import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
+import convertScoreToColorAndEmoji from './Utils/convertScoreToColorAndEmoji';
 import './App.css';
 import store from './store';
 
