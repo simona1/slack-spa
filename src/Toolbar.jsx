@@ -2,9 +2,7 @@
 
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import slack from './images/slackIcon.png';
+import slack from './images/iconSlack.png';
 import frustrated from './images/emojis/frustrated.jpg';
 import sad from './images/emojis/sad.jpg';
 import neutral from './images/emojis/neutral.jpg';

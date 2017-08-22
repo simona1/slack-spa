@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import logo from './images/slack-logo.png';
 // import slackConnectHref from './connectWithSlackHref';
-import slack from './images/slackIcon.png';
+import slack from './images/iconSlack.png';
 
 import store from './store';
 import {connectWithSlack} from './Actions';
