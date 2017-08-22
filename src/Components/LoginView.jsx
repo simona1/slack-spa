@@ -1,5 +1,5 @@
 // @flow
-
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Image } from 'semantic-ui-react';
@@ -9,9 +9,9 @@ import logo from '../images/slack-logo.png';
 // import slackConnectHref from '../Constants/connectWithSlackHref';
 import slack from '../images/slackIcon.png';
 import { connectWithSlack } from '../Actions/index';
+import type { Dispatch } from '../FlowTypes/Types';
 
-
-export function LoginView(props) {
+export function LoginView(props: Object) {
   const { connectWithSlack } = props;
 
   return (
@@ -43,7 +43,7 @@ LoginView.defaultProps = {
 };
 
 
-export const mapDispatchToProps = dispatch =>
+export const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ connectWithSlack }, dispatch);
 
 export default connect(null, mapDispatchToProps)(LoginView);

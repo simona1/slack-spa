@@ -1,5 +1,6 @@
 // @flow
 
+/* eslint-disable */
 import React from 'react';
 import { List } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
@@ -7,6 +8,7 @@ import { connect } from 'react-redux';
 import { fetchMessagesForChannel } from '../Actions/index';
 import Message from './Message';
 import owl from '../images/avatars/owl.png';
+import type { Dispatch, State } from '../FlowTypes/Types';
 
 class MessageList extends React.Component {
   props: {
@@ -50,7 +52,7 @@ class MessageList extends React.Component {
 
 export { MessageList };
 
-export const mapStateToProps = (state) => {
+export const mapStateToProps = (state: State) => {
   const messages = state.channelData[state.selectedChannel];
   return {
     messages,
@@ -59,7 +61,7 @@ export const mapStateToProps = (state) => {
   };
 };
 
-export const mapDispatchToProps = dispatch =>
+export const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ fetchMessagesForChannel }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageList);

@@ -1,5 +1,6 @@
 // @flow
 
+/* eslint-disable */
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -35,7 +36,7 @@ export class Toolbar extends React.Component {
   props: {
     score: mixed,
     channelData: ChannelData,
-    fetchChannels: func,
+    fetchChannels: Function,
     selectChannel: mixed,
     selectedChannel: mixed,
 

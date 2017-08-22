@@ -24,7 +24,7 @@ function fetchRequest(path) {
 
 export function connectWithSlack() {
   return {
-    type: CONNECTED_WITH_SLACK,
+    type: 'CONNECTED_WITH_SLACK',
   };
 }
 
@@ -34,7 +34,7 @@ export function fetchChannels() {
     const channels = await response.json();
     dispatch({
       channels,
-      type: RECEIVED_CHANNEL_LIST,
+      type: 'RECEIVED_CHANNEL_LIST',
     });
   };
 }
@@ -50,7 +50,7 @@ export function fetchMessagesForChannel(channel: string) {
     dispatch({
       channel,
       messages: {},
-      type: RECEIVED_MESSAGES_FOR_CHANNEL,
+      type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
     });
 
     // TODO: replace with real Api call
@@ -62,14 +62,14 @@ export function processNewMessages(newMessageData: {[string]: ?{[Id]: {[Id]: Mes
   // Mark that we have messages to avoid fetching multiple times.
   return {
     messages: newMessageData,
-    type: RECEIVED_NEW_MESSAGES,
+    type: 'RECEIVED_NEW_MESSAGES',
   };
 }
 
 export function processNewScores(scoreData: {[string]: number}) {
   return {
     scoreData,
-    type: RECEIVED_NEW_SCORE,
+    type: 'RECEIVED_NEW_SCORE',
   };
 }
 
@@ -81,6 +81,6 @@ export function selectChannel(channel: string) {
   }
   return {
     channel,
-    type: SELECT_CHANNEL,
+    type: 'SELECT_CHANNEL',
   };
 }
