@@ -1,31 +1,24 @@
 // @flow
+
+/* eslint-disable */
+
+/* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LoginView from './LoginView';
-import MessageList from './MessageList';
-import Toolbar from './Toolbar';
-import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
+import LoginView from './Components/LoginView';
+import MessageList from './Components/MessageList';
+import Toolbar from './Components/Toolbar';
+import type { State } from './FlowTypes/Types';
 import './App.css';
-import store from './store';
-
-// type AppProps = {
-//
-// };
-//
-// export default function App(props: AppProps) {
-//   // const messages = ...;
 
 class App extends Component {
-  componentWillMount() {
-    store.subscribe(() => this.forceUpdate());
-  }
+  props: {
+    isConnectedWithSlack: boolean,
+    selectedChannel: mixed,
+  };
 
   render() {
-    const {isConnectedWithSlack, currentScore, selectedChannel} = this.props;
-    //const state = this.props;
-    //const currentScore = state.scoreData[state.selectedChannel] || 0.01;
-    // const computedColor = convertScoreToColorAndEmoji(currentScore).color;
-    // const computedEmoji = convertScoreToColorAndEmoji(currentScore).emoji;
+    const { isConnectedWithSlack, selectedChannel } = this.props;
 
     if (!isConnectedWithSlack) {
       return <LoginView />;
@@ -34,11 +27,7 @@ class App extends Component {
     return (
       <div>
         <div>
-          <Toolbar
-            // color={computedColor}
-            //score={currentScore}
-            //isShowingScores={false}
-          />
+          <Toolbar />
         </div>
         <div className="listColor">
           <MessageList selectedChannel={selectedChannel} />
@@ -48,19 +37,18 @@ class App extends Component {
   }
 }
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state: State) => {
   const currentScore = state.scoreData[state.selectedChannel] || 0.01;
   const messages = state.channelData[state.selectedChannel] || {};
   return {
-    //isShowingScores: state.isShowingScores,
+    // isShowingScores: state.isShowingScores,
     messages,
     score: state.score,
     selectedChannel: state.selectedChannel,
     isConnectedWithSlack: state.isConnectedWithSlack,
     // slackSession: state.slackSession,
     currentScore,
-  }
   };
-
+};
 
 export default connect(mapStateToProps)(App);

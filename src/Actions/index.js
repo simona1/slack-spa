@@ -1,16 +1,26 @@
 // @flow
 
-import type { State, MessageType, Id } from './store';
-type Dispatch = ({ type: string }) => void;
-type GetState = () => State;
+import type {
+  MessageType,
+  Id,
+  Dispatch,
+  GetState,
+} from '../FlowTypes/Types';
 
 // const PATH = 'https://databraid.localtunnel.me';
 const PATH = 'http://localhost:4000/';
 
-function fetchRequest(path, method = 'GET') {
+export const CONNECTED_WITH_SLACK = 'CONNECTED_WITH_SLACK';
+export const RECEIVED_CHANNEL_LIST = 'RECEIVED_CHANNEL_LIST';
+export const RECEIVED_MESSAGES_FOR_CHANNEL = 'RECEIVED_MESSAGES_FOR_CHANNEL';
+export const RECEIVED_NEW_MESSAGES = 'RECEIVED_NEW_MESSAGES';
+export const RECEIVED_NEW_SCORE = 'RECEIVED_NEW_SCORE';
+export const SELECT_CHANNEL = 'SELECT_CHANNEL';
+
+/* eslint func-names: ["error", "never"] */
+function fetchRequest(path) {
   return fetch(path);
 }
-
 
 export function connectWithSlack() {
   return {
@@ -22,7 +32,6 @@ export function fetchChannels() {
   return async function (dispatch: Dispatch) {
     const response = await fetchRequest(`${PATH}channels`);
     const channels = await response.json();
-    console.log(channels);
     dispatch({
       channels,
       type: 'RECEIVED_CHANNEL_LIST',
@@ -46,12 +55,6 @@ export function fetchMessagesForChannel(channel: string) {
 
     // TODO: replace with real Api call
     fetch('http://localhost:4000/messages');
-
-    /*      dispatch({
-    channel,
-    messages,
-    type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
-  }); */
   };
 }
 
@@ -71,11 +74,6 @@ export function processNewScores(scoreData: {[string]: number}) {
 }
 
 export function selectChannel(channel: string) {
-  if (Math.random() > 0.5) {
-    fetch('http://localhost:4000/score/happy');
-  } else {
-    fetch('http://localhost:4000/score/sad');
-  }
   return {
     channel,
     type: 'SELECT_CHANNEL',

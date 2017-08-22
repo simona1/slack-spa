@@ -1,20 +1,19 @@
 // @flow
-
+/* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Image } from 'semantic-ui-react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import logo from '../images/slack-logo.png';
+// import slackConnectHref from '../Constants/connectWithSlackHref';
+import slack from '../images/slackIcon.png';
+import { connectWithSlack } from '../Actions/index';
+import type { Dispatch } from '../FlowTypes/Types';
 
-import logo from './images/slack-logo.png';
-// import slackConnectHref from './connectWithSlackHref';
-import slack from './images/iconSlack.png';
+export function LoginView(props: Object) {
+  const { connectWithSlack } = props;
 
-import store from './store';
-import {connectWithSlack} from './Actions';
-
-export function LoginView(props) {
-  //console.log(props)
-  const {connectWithSlack} = props;
   return (
     <div>
       <div className="SlackApp">
@@ -39,9 +38,12 @@ export function LoginView(props) {
   );
 }
 
-export const mapDispatchToProps = (dispatch) => {
-  //const {connectWithSlack} = Actions;
-  return bindActionCreators({connectWithSlack}, dispatch);
-}
+LoginView.defaultProps = {
+  connectWithSlack: PropTypes.function,
+};
+
+
+export const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators({ connectWithSlack }, dispatch);
 
 export default connect(null, mapDispatchToProps)(LoginView);

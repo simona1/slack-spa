@@ -1,20 +1,16 @@
 // @flow
 
+/* eslint-disable */
 import React from 'react';
 import { List } from 'semantic-ui-react';
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { fetchMessagesForChannel } from '../Actions/index';
 import Message from './Message';
-import owl from './images/avatars/owl.png';
+import owl from '../images/avatars/owl.png';
+import type { Dispatch, State } from '../FlowTypes/Types';
 
-import store from './store';
-import {fetchMessagesForChannel} from './Actions';
-
-export class MessageList extends React.Component {
-  componentWillMount() {
-    store.subscribe(() => this.forceUpdate());
-  }
-
+class MessageList extends React.Component {
   props: {
     selectedChannel: ?string,
     messages: {},
@@ -23,7 +19,6 @@ export class MessageList extends React.Component {
   render() {
     const { selectedChannel } = this.props;
     let { messages } = this.props;
-    //let messages = store.getState().channelData[this.props.selectedChannel];
     if (!messages) {
       if (selectedChannel) {
         setTimeout(
@@ -55,17 +50,18 @@ export class MessageList extends React.Component {
   }
 }
 
-export const mapStateToProps = (state, ownProps) => {
-  let messages = state.channelData[state.selectedChannel];
+export { MessageList };
+
+export const mapStateToProps = (state: State) => {
+  const messages = state.channelData[state.selectedChannel];
   return {
     messages,
     selectedChannel: state.selectedChannel,
-    //currentScore,
-  }
+    // currentScore,
+  };
 };
 
-//const fetchMessagesForChannel = Actions.fetchMessagesForChannel;
-export const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({fetchMessagesForChannel}, dispatch);
+export const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators({ fetchMessagesForChannel }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageList)
+export default connect(mapStateToProps, mapDispatchToProps)(MessageList);

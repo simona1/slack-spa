@@ -1,19 +1,20 @@
 // @flow
 
-import { Dropdown, Image, Menu } from 'semantic-ui-react';
+/* eslint-disable */
 import React from 'react';
-import slack from './images/iconSlack.png';
-import frustrated from './images/emojis/frustrated.jpg';
-import sad from './images/emojis/sad.jpg';
-import neutral from './images/emojis/neutral.jpg';
-import happy from './images/emojis/happy.jpg';
-import smile from './images/emojis/smile.jpg';
-import convertScoreToColorAndEmoji from './convertScoreToColorAndEmoji';
-
-import './index.css';
-// import store from './store';
-import Actions from './Actions';
-import {selectChannel, fetchChannels} from './Actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Dropdown, Image, Menu } from 'semantic-ui-react';
+import { selectChannel, fetchChannels } from '../Actions/index';
+import convertScoreToColorAndEmoji from '../Utils/convertScoreToColorAndEmoji';
+import frustrated from '../images/emojis/frustrated.jpg';
+import happy from '../images/emojis/happy.jpg';
+import neutral from '../images/emojis/neutral.jpg';
+import sad from '../images/emojis/sad.jpg';
+import slack from '../images/slackIcon.png';
+import smile from '../images/emojis/smile.jpg';
+import '../index.css';
+import type { ChannelData } from '../FlowTypes/Types';
 
 const sentiments =
   {
@@ -24,25 +25,25 @@ const sentiments =
     happy,
   };
 
-
 export class Toolbar extends React.Component {
   componentWillMount() {
     const channels = Object.keys(this.props.channelData);
     if (channels.length === 0) {
-      this.props.fetchChannels()
+      this.props.fetchChannels();
     }
   }
 
   props: {
-    //color: string,
-    isShowingScores: boolean,
     score: mixed,
+    channelData: ChannelData,
+    fetchChannels: Function,
+    selectChannel: mixed,
+    selectedChannel: mixed,
+
   };
 
   render() {
     const { score, selectedChannel, channelData, selectChannel } = this.props;
-    console.log(score);
-    //const { selectedChannel } = store.getState();
     const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
     const computedColor = convertScoreToColorAndEmoji(score).color;
     const menuClasses = `ui ${computedColor} inverted menu`;
@@ -79,17 +80,14 @@ export class Toolbar extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    selectedChannel: state.selectedChannel,
-    score: state.scoreData[state.selectedChannel],
-    channelData: state.channelData,
+const mapStateToProps = state => ({
+  selectedChannel: state.selectedChannel,
+  score: state.scoreData[state.selectedChannel],
+  channelData: state.channelData,
+});
+const mapDispatchToProps = dispatch =>
+bindActionCreators({
+  selectChannel, fetchChannels,
+}, dispatch);
 
-  }
-};
-const mapDispatchToProps = (dispatch) =>{
-
-  return bindActionCreators({selectChannel, fetchChannels}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Toolbar)
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);
