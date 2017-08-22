@@ -1,24 +1,22 @@
 // @flow
+
+/* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginView from './Components/LoginView';
 import MessageList from './Components/MessageList';
 import Toolbar from './Components/Toolbar';
-import convertScoreToColorAndEmoji from './Utils/convertScoreToColorAndEmoji';
 import './App.css';
-import store from './store';
-
-// type AppProps = {
-//
-// };
-//
-// export default function App(props: AppProps) {
-//   // const messages = ...;
 
 class App extends Component {
 
+  props: {
+    isConnectedWithSlack: boolean,
+    selectedChannel: mixed,
+  };
+
   render() {
-    const { isConnectedWithSlack, currentScore, selectedChannel } = this.props;
+    const { isConnectedWithSlack, selectedChannel } = this.props;
 
     if (!isConnectedWithSlack) {
       return <LoginView />;
@@ -37,7 +35,7 @@ class App extends Component {
   }
 }
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state) => {
   const currentScore = state.scoreData[state.selectedChannel] || 0.01;
   const messages = state.channelData[state.selectedChannel] || {};
   return {

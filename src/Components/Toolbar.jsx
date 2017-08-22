@@ -13,6 +13,7 @@ import sad from '../images/emojis/sad.jpg';
 import slack from '../images/slackIcon.png';
 import smile from '../images/emojis/smile.jpg';
 import '../index.css';
+import type { ChannelData } from '../FlowTypes/Types';
 
 const sentiments =
   {
@@ -32,9 +33,12 @@ export class Toolbar extends React.Component {
   }
 
   props: {
-    // color: string,
-    isShowingScores: boolean,
     score: mixed,
+    channelData: ChannelData,
+    fetchChannels: func,
+    selectChannel: mixed,
+    selectedChannel: mixed,
+
   };
 
   render() {
@@ -79,7 +83,6 @@ const mapStateToProps = state => ({
   selectedChannel: state.selectedChannel,
   score: state.scoreData[state.selectedChannel],
   channelData: state.channelData,
-
 });
 const mapDispatchToProps = dispatch =>
 bindActionCreators({

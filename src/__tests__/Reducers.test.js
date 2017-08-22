@@ -1,5 +1,5 @@
 import { Reducer } from 'redux-testkit';
-import { storeReducer } from '../store.js';
+import { storeReducer } from '../store';
 
 const initialState = {
   isShowingScores: false,
@@ -20,30 +20,40 @@ describe('storeReducer', () => {
 
   it('should store boolean for slack connection', () => {
     const action = { type: 'CONNECTED_WITH_SLACK' };
-    Reducer(storeReducer).withState(initialState).expect(action).toReturnState({ ...initialState, isConnectedWithSlack: true });
+    Reducer(storeReducer)
+      .withState(initialState)
+      .expect(action)
+      .toReturnState({ ...initialState, isConnectedWithSlack: true });
   });
 
   it('should store selected channel', () => {
     const existingState = { ...initialState, selectedChannel: 1 };
     const action = { type: 'SELECT_CHANNEL', channel: 2 };
-    Reducer(storeReducer).withState(existingState).expect(action).toReturnState({ ...initialState, selectedChannel: 2 });
+    Reducer(storeReducer)
+      .withState(existingState)
+      .expect(action)
+      .toReturnState({ ...initialState, selectedChannel: 2 });
   });
 
   it('should store new channel data', () => {
     // const channels = ['#random', '#general', '#redux'];
     // const action = {type: 'RECEIVED_CHANNEL_LIST', channels};
-    // Reducer(storeReducer).withState(initialState).expect(action).toReturnState({...initialState, channelData: ???, selectedChannel: ???});
+    // Reducer(storeReducer)
+    // .withState(initialState)
+    // .expect(action)
+    // .toReturnState({...initialState, channelData: ???, selectedChannel: ???});
 
-
-  //* **Not sure exactly what this is supposed to be returning. What is channelData supposed to look like?
+  // Not sure exactly what this is supposed to be returning.
+  // What is channelData supposed to look like?
   });
 
   it('should store messages for channel', () => {
     // const action = {type: 'RECEIVED_MESSAGES_FOR_CHANNEL'};
-    // Reducer(storeReducer).withState(initialState).expect(action).toReturnState({...initialState, channelData: ???});
-
-
-    //* **Not sure how the action associated with this is supposed to work
+    // Reducer(storeReducer)
+    //   .withState(initialState)
+    //   .expect(action)
+    //   .toReturnState({...initialState, channelData: ???});
+    // Not sure how the action associated with this is supposed to work
   });
 
   it('should store score for recent messages', () => {
@@ -51,18 +61,20 @@ describe('storeReducer', () => {
       type: 'RECEIVED_SCORE_FOR_MESSAGES',
       channel: 1,
       score: 0.20 };
-    Reducer(storeReducer).withState(initialState).expect(action).toReturnState({ ...initialState, scoreData: { 1: 0.20 } });
+    Reducer(storeReducer)
+      .withState(initialState)
+      .expect(action)
+      .toReturnState({ ...initialState, scoreData: { 1: 0.20 } });
 
-
-    //* **No action to go with this reducer
+    // No action to go with this reducer
   });
 
   it('should store boolean indicating score presence', () => {
     const action = { type: 'SHOW_SCORE' };
-    Reducer(storeReducer).withState(initialState).expect(action).toReturnState({ ...initialState, isShowingScores: true });
-
-
-    //* **No action to go with this reducer
+    Reducer(storeReducer)
+      .withState(initialState)
+      .expect(action)
+      .toReturnState({ ...initialState, isShowingScores: true });
   });
 
   it('should store new message', () => {
@@ -74,10 +86,17 @@ describe('storeReducer', () => {
     //     2: 'Here is another new message',
     //   }
     // };
-    // const action = {type: 'RECEIVED_NEW_MESSAGES', newMessageData};
-    // Reducer(storeReducer).withState(initialState).expect(action).toReturnState({...initialState, channelData: ???});
+    // const action = {
+    //   type: 'RECEIVED_NEW_MESSAGES',
+    //   newMessageData
+    // };
+    //  Reducer(storeReducer)
+    //    .withState(initialState)
+    //    .expect(action)
+    //    .toReturnState({...initialState, channelData: ???});
 
 
-    //* **Not sure exactly what this is supposed to be returning. What is channelData supposed to look like?
+    // Not sure exactly what this is supposed
+    // to be returning. What is channelData supposed to look like?
   });
 });

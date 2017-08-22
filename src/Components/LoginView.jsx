@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Image } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,8 +10,10 @@ import logo from '../images/slack-logo.png';
 import slack from '../images/slackIcon.png';
 import { connectWithSlack } from '../Actions/index';
 
+
 export function LoginView(props) {
   const { connectWithSlack } = props;
+
   return (
     <div>
       <div className="SlackApp">
@@ -34,6 +37,11 @@ export function LoginView(props) {
     </div>
   );
 }
+
+LoginView.defaultProps = {
+  connectWithSlack: PropTypes.function,
+};
+
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({ connectWithSlack }, dispatch);

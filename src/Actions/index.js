@@ -1,9 +1,11 @@
 // @flow
 
-import type { State, MessageType, Id } from '../FlowTypes/Types';
-
-type Dispatch = ({ type: string }) => void;
-type GetState = () => State;
+import type {
+  MessageType,
+  Id,
+  Dispatch,
+  GetState,
+} from '../FlowTypes/Types';
 
 // const PATH = 'https://databraid.localtunnel.me';
 const PATH = 'http://localhost:4000/';
@@ -15,6 +17,7 @@ export const RECEIVED_NEW_MESSAGES = 'RECEIVED_NEW_MESSAGES';
 export const RECEIVED_NEW_SCORE = 'RECEIVED_NEW_SCORE';
 export const SELECT_CHANNEL = 'SELECT_CHANNEL';
 
+/* eslint func-names: ["error", "never"] */
 function fetchRequest(path) {
   return fetch(path);
 }
@@ -31,13 +34,13 @@ export function fetchChannels() {
     const channels = await response.json();
     dispatch({
       channels,
-      type: 'RECEIVED_CHANNEL_LIST',
+      type: RECEIVED_CHANNEL_LIST,
     });
   };
 }
 
 export function fetchMessagesForChannel(channel: string) {
-  return async function(dispatch: Dispatch, getState: GetState) {
+  return async function (dispatch: Dispatch, getState: GetState) {
     const oldMessages = getState().channelData[channel];
     if (oldMessages) {
       // Don't fetch again if we already have messages.
@@ -47,17 +50,11 @@ export function fetchMessagesForChannel(channel: string) {
     dispatch({
       channel,
       messages: {},
-      type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
+      type: RECEIVED_MESSAGES_FOR_CHANNEL,
     });
 
     // TODO: replace with real Api call
     fetch('http://localhost:4000/messages');
-
-    /*      dispatch({
-    channel,
-    messages,
-    type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
-  }); */
   };
 }
 
@@ -65,14 +62,14 @@ export function processNewMessages(newMessageData: {[string]: ?{[Id]: {[Id]: Mes
   // Mark that we have messages to avoid fetching multiple times.
   return {
     messages: newMessageData,
-    type: 'RECEIVED_NEW_MESSAGES',
+    type: RECEIVED_NEW_MESSAGES,
   };
 }
 
 export function processNewScores(scoreData: {[string]: number}) {
   return {
     scoreData,
-    type: 'RECEIVED_NEW_SCORE',
+    type: RECEIVED_NEW_SCORE,
   };
 }
 
@@ -84,6 +81,6 @@ export function selectChannel(channel: string) {
   }
   return {
     channel,
-    type: 'SELECT_CHANNEL',
+    type: SELECT_CHANNEL,
   };
 }

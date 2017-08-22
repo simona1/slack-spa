@@ -7,7 +7,7 @@ export type MessageType = {
   timestamp: string,
 };
 
-type ChannelData = {[string]: ?{[Id]: {[Id]: MessageType}}};
+export type ChannelData = {[string]: ?{[Id]: {[Id]: MessageType}}};
 
 export type State = {
   // isShowingScores: boolean,
@@ -16,3 +16,6 @@ export type State = {
   scoreData: {[string]: ?number},
   selectedChannel: ?string,
 };
+
+export type Dispatch = ({ type: string }) => void;
+export type GetState = () => State;
