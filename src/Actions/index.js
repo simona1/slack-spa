@@ -74,11 +74,6 @@ export function processNewScores(scoreData: {[string]: number}) {
 }
 
 export function selectChannel(channel: string) {
-  if (Math.random() > 0.5) {
-    fetch('http://localhost:4000/score/happy');
-  } else {
-    fetch('http://localhost:4000/score/sad');
-  }
   return {
     channel,
     type: 'SELECT_CHANNEL',
