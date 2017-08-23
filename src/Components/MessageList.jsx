@@ -19,6 +19,8 @@ class MessageList extends React.Component {
   render() {
     const { selectedChannel } = this.props;
     let { messages } = this.props;
+
+// TODO: remove this code - will fetch messages through sockets
     if (!messages) {
       if (selectedChannel) {
         setTimeout(
