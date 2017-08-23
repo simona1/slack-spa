@@ -1,17 +1,15 @@
 import { Thunk } from 'redux-testkit';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import * as actions from '../Actions/index';
+
 import {
   connectWithSlack,
-  fetchChannels,
   processNewMessages,
   processNewScores,
   selectChannel,
 } from '../Actions/index';
 
-function mockPromise(data, delay) {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(data), delay || 2000);
-  });
-}
 
 describe('Actions', () => {
   it('should return an action object from connecting with Slack', () => {
@@ -21,16 +19,42 @@ describe('Actions', () => {
     });
   });
 
-  it('should return an action object from fetchChannels', async () => {
-    const channels = await mockPromise(['#random', '#general', '#dev']);
-    const dispatches = await Thunk(fetchChannels).execute();
-    expect(dispatches.length).toBe(1);
-    expect(dispatches[0].isPlainObject()).toBe(true);
-    expect(dispatches[0].getAction()).toEqual({
-      channels,
-      type: 'RECEIVED_CHANNEL_LIST',
+  it('should return an action object from fetchChannels', function() {
+    const channels = ['#random', '#general', '#dev'];
+    const mockApiFetchChannels = jest.fn();
+    mockApiFetchChannels.mockReturnValue(
+      Promise.resolve({channels})
+    );
+
+    const extraArgument = {
+      Api: {
+        fetchChannels: mockApiFetchChannels,
+      }
+    }
+
+    const initialState = {
+      isShowingScores: false,
+      isConnectedWithSlack: false,
+      channelData: {},
+      scoreData: {},
+      selectedChannel: null,
+    };
+
+    const expectedActions = [
+        {
+          type: 'RECEIVED_CHANNEL_LIST',
+          channels: ['#random', '#general', '#dev'],
+        }
+      ]
+
+      const mockStore = configureStore([ thunk.withExtraArgument(extraArgument) ]);
+      const store = mockStore(initialState);
+
+      return store.dispatch(actions.fetchChannels())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
     });
-  });
 
   it('should return an action object from processNewMessages', () => {
     const newMessageData = {

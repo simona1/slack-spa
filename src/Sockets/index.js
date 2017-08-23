@@ -1,12 +1,13 @@
 // @flow
 
+/* eslint-disable */
 import openSocket from 'socket.io-client';
 import type { Store } from 'redux';
 import { processNewScores, processNewMessages } from '../Actions/index';
 import store from '../store';
 
 const socket = openSocket('http://localhost:4000');
-//const socket = openSocket('https://databraid.localtunnel.me');
+// const socket = openSocket('https://databraid.localtunnel.me');
 
 
 // TODO: needs to be refactored to remove reference to the store.
