@@ -1,3 +1,7 @@
+export type Action = {
+  type: string,
+};
+
 export type Id = mixed;
 
 export type MessageType = {

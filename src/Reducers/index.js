@@ -1,24 +1,25 @@
-import { CONNECTED_WITH_SLACK, RECEIVED_CHANNEL_LIST, RECEIVED_MESSAGES_FOR_CHANNEL, RECEIVED_NEW_MESSAGES, RECEIVED_NEW_SCORE, SELECT_CHANNEL } from '../Actions/index';
+// @flow
+import type {Action, ChannelData, State} from '../FlowTypes/';
 
-export default function storeReducer(state: State, action): State {
+export default function storeReducer(state: State, action: Action): State {
   let newChannelData: ChannelData;
   let newScoreData: {[string]: ?number};
 
   let newSelectedChannel;
   switch (action.type) {
-    case CONNECTED_WITH_SLACK:
+    case 'CONNECTED_WITH_SLACK':
       return {
         ...state,
         isConnectedWithSlack: true,
       };
 
-    case SELECT_CHANNEL:
+    case 'SELECT_CHANNEL':
       return {
         ...state,
         selectedChannel: action.channel,
       };
 
-    case RECEIVED_CHANNEL_LIST:
+    case 'RECEIVED_CHANNEL_LIST':
       newChannelData = { ...state.channelData };
       action.channels.forEach((channel) => {
         newChannelData[channel] = newChannelData[channel] || null;
@@ -32,7 +33,7 @@ export default function storeReducer(state: State, action): State {
         channelData: newChannelData,
         selectedChannel: newSelectedChannel,
       };
-    case RECEIVED_MESSAGES_FOR_CHANNEL:
+    case 'RECEIVED_MESSAGES_FOR_CHANNEL':
       newChannelData = { ...state.channelData };
       newChannelData[action.channel] = { ...newChannelData[action.channel] };
       Object.keys(action.messages).forEach((id) => {
@@ -43,7 +44,7 @@ export default function storeReducer(state: State, action): State {
         channelData: newChannelData,
       };
 
-    case RECEIVED_NEW_SCORE:
+    case 'RECEIVED_NEW_SCORE':
       newScoreData = { ...state.scoreData, ...action.scoreData };
       return {
         ...state,
@@ -56,7 +57,7 @@ export default function storeReducer(state: State, action): State {
         isShowingScores: true,
       };
 
-    case RECEIVED_NEW_MESSAGES:
+    case 'RECEIVED_NEW_MESSAGES':
       newChannelData = { ...state.channelData };
       Object.keys(action.messages).forEach((channelId) => {
         newChannelData[channelId] = { ...newChannelData[channelId] };

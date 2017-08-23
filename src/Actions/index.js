@@ -10,13 +10,6 @@ import type {
 // const PATH = 'https://databraid.localtunnel.me';
 const PATH = 'http://localhost:4000/';
 
-export const CONNECTED_WITH_SLACK = 'CONNECTED_WITH_SLACK';
-export const RECEIVED_CHANNEL_LIST = 'RECEIVED_CHANNEL_LIST';
-export const RECEIVED_MESSAGES_FOR_CHANNEL = 'RECEIVED_MESSAGES_FOR_CHANNEL';
-export const RECEIVED_NEW_MESSAGES = 'RECEIVED_NEW_MESSAGES';
-export const RECEIVED_NEW_SCORE = 'RECEIVED_NEW_SCORE';
-export const SELECT_CHANNEL = 'SELECT_CHANNEL';
-
 /* eslint func-names: ["error", "never"] */
 function fetchRequest(path) {
   return fetch(path);
