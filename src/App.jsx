@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import LoginView from './Components/LoginView';
 import MessageList from './Components/MessageList';
 import Toolbar from './Components/Toolbar';
-import type { State } from './FlowTypes/Types';
+import type { State } from './FlowTypes/';
 import './App.css';
 
 class App extends Component {

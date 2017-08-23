@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { fetchMessagesForChannel } from '../Actions/index';
 import Message from './Message';
 import owl from '../images/avatars/owl.png';
-import type { Dispatch, State } from '../FlowTypes/Types';
+import type { Dispatch, State } from '../FlowTypes/';
 
 class MessageList extends React.Component {
   props: {

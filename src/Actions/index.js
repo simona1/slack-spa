@@ -5,7 +5,7 @@ import type {
   Id,
   Dispatch,
   GetState,
-} from '../FlowTypes/Types';
+} from '../FlowTypes/';
 
 // const PATH = 'https://databraid.localtunnel.me';
 const PATH = 'http://localhost:4000/';

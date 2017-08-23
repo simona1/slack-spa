@@ -14,7 +14,7 @@ import sad from '../images/emojis/sad.jpg';
 import slack from '../images/slackIcon.png';
 import smile from '../images/emojis/smile.jpg';
 import '../index.css';
-import type { ChannelData } from '../FlowTypes/Types';
+import type { ChannelData } from '../FlowTypes/';
 
 const sentiments =
   {
