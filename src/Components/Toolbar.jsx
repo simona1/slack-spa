@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import { selectChannel, fetchChannels } from '../Actions/index';
-import convertScoreToColorAndEmoji from '../Utils/convertScoreToColorAndEmoji';
+import convertScoreToColorAndEmoji from '../Utils/';
 import frustrated from '../images/emojis/frustrated.jpg';
 import happy from '../images/emojis/happy.jpg';
 import neutral from '../images/emojis/neutral.jpg';
