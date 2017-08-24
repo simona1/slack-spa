@@ -1,5 +1,5 @@
 // @flow
-import type {Action, ChannelData, State} from '../FlowTypes/';
+import type { Action, ChannelData, State } from '../FlowTypes/';
 
 export default function storeReducer(state: State, action: Action): State {
   let newChannelData: ChannelData;
