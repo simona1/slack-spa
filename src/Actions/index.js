@@ -32,6 +32,7 @@ export function fetchChannels() {
   };
 }
 
+
 export function fetchMessagesForChannel(channel: string) {
   return async function (dispatch: Dispatch, getState: GetState) {
     const oldMessages = getState().channelData[channel];
