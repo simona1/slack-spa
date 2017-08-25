@@ -10,11 +10,21 @@ import MessageList from './Components/MessageList';
 import Toolbar from './Components/Toolbar';
 import type { State } from './FlowTypes/';
 import './App.css';
+import { WIDGET_ID } from './Constants/';
+
+const PropTypes = require('prop-types');
+
 
 class App extends Component {
+  getChildContext() {
+    return { widgetId: this.props.widgetId };
+  }
+
+
   props: {
     isConnectedWithSlack: boolean,
     selectedChannel: mixed,
+    widgetId: string,
   };
 
   render() {
@@ -35,6 +45,10 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.childContextTypes = {
+  widgetId: PropTypes.string,
 }
 
 export const mapStateToProps = (state: State) => {

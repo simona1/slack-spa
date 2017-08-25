@@ -8,12 +8,14 @@ import getSocket from './Sockets/';
 // import openSocket from 'socket.io-client';
 // import { processNewScores, processNewMessages } from './Actions/index';
 import store from './store';
+import { WIDGET_ID as widgetId } from './Constants/';
+
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  React.createElement(Provider, { store },
+  React.createElement(Provider, { store, widgetId },
     React.createElement(App),
   ),
   document.getElementById('root'),
