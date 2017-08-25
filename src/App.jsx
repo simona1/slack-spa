@@ -13,8 +13,6 @@ import './App.css';
 import { WIDGET_ID } from './Constants/';
 
 const PropTypes = require('prop-types');
-import injectWidgetId from './Utils/utils';
-
 
 
 class App extends Component {
