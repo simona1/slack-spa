@@ -9,10 +9,8 @@ const a = {
   isShowingScores: false,   // will need this later
   isConnectedWithSlack: false,
   channelData: {},
-  scoreData: {
-  '#redux': 0.5,
-},
-  selectedChannel: 'score',
+  scoreData: {},
+  selectedChannel: null,
 };
 
 export function storeReducer(state = a, action: Action): State {

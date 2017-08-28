@@ -73,23 +73,24 @@ export const mapStateToProps = (state: State, ownProps) => {
   console.log('$$$', state, ownProps);
   // let channelData = {'#redux': {}}
   // let selectedChannel = '#redux';
-
-  let messages = {};
+  // let messages = {};
 
   const currentScore = state.widgets.byId[id].scoreData[state.widgets.byId[id].selectedChannel];
-  // const messages = state.widgets.byId[id].channelData[state.widgets.byId[id].selectedChannel];
+  const messages = state.widgets.byId[id].channelData[state.widgets.byId[id].selectedChannel];
 
   const isConnectedWithSlack = state.widgets.byId[id].isConnectedWithSlack;
   const selectedChannel = state.widgets.byId[id].selectedChannel;
+  const score = state.widgets.byId[id].score;
+  const isShowingScores = state.widgets.byId[id].isShowingScores;
 
   return {
-    // isShowingScores: state.isShowingScores,
+    isShowingScores,
     messages,
-    // score: state.score,
-    // selectedChannel,
+    score,
+    selectedChannel,
     isConnectedWithSlack,
     // slackSession: state.slackSession,
-    // currentScore,
+    currentScore,
   };
 };
 

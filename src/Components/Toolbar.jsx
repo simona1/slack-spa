@@ -92,7 +92,9 @@ export const mapStateToProps = (state: State, ownProps) => {
   const channelData = state.widgets.byId[id].channelData;
 
   return {
-    channelData
+    channelData,
+    score,
+    selectedChannel,
   }
 };
 
