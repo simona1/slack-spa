@@ -13,13 +13,14 @@ import './App.css';
 import { WIDGET_ID } from './Constants/';
 
 const PropTypes = require('prop-types');
+import injectWidgetId from './Utils/utils';
+
 
 
 class App extends Component {
   getChildContext() {
     return { widgetId: this.props.widgetId };
   }
-
 
   props: {
     isConnectedWithSlack: boolean,
@@ -29,6 +30,8 @@ class App extends Component {
 
   render() {
     const { isConnectedWithSlack, selectedChannel } = this.props;
+
+    console.log('^^^', isConnectedWithSlack);
 
     if (!isConnectedWithSlack) {
       return <LoginView />;
@@ -47,21 +50,46 @@ class App extends Component {
   }
 }
 
+
+App.propTypes = {
+  widgetId: PropTypes.string.isRequired,
+};
+
+App.defaultProps = {
+  widgetId: WIDGET_ID,
+  isShowingScores: false,   // will need this later
+  isConnectedWithSlack: false,
+  channelData: {'#redux': {}},
+  scoreData: {'score': 0.01},
+  selectedChannel: null,
+};
+
 App.childContextTypes = {
   widgetId: PropTypes.string,
 }
 
-export const mapStateToProps = (state: State) => {
-  const currentScore = state.scoreData[state.selectedChannel] || 0.01;
-  const messages = state.channelData[state.selectedChannel] || {};
+export const mapStateToProps = (state: State, ownProps) => {
+  const id = ownProps.widgetId;
+  console.log('$$$', state, ownProps);
+  // let channelData = {'#redux': {}}
+  // let selectedChannel = '#redux';
+
+  let messages = {};
+
+  const currentScore = state.widgets.byId[id].scoreData[state.widgets.byId[id].selectedChannel];
+  // const messages = state.widgets.byId[id].channelData[state.widgets.byId[id].selectedChannel];
+
+  const isConnectedWithSlack = state.widgets.byId[id].isConnectedWithSlack;
+  const selectedChannel = state.widgets.byId[id].selectedChannel;
+
   return {
     // isShowingScores: state.isShowingScores,
     messages,
-    score: state.score,
-    selectedChannel: state.selectedChannel,
-    isConnectedWithSlack: state.isConnectedWithSlack,
+    // score: state.score,
+    // selectedChannel,
+    isConnectedWithSlack,
     // slackSession: state.slackSession,
-    currentScore,
+    // currentScore,
   };
 };
 

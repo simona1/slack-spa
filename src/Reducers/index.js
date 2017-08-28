@@ -1,11 +1,30 @@
 // @flow
 import type {Action, ChannelData, State} from '../FlowTypes/';
+import { combineReducers } from 'redux';
+import { WIDGET_ID } from '../Constants/';
 
-export default function storeReducer(state: State, action: Action): State {
+console.log('***', WIDGET_ID);
+
+const a = {
+  isShowingScores: false,   // will need this later
+  isConnectedWithSlack: false,
+  channelData: {},
+  scoreData: {
+  '#redux': 0.5,
+},
+  selectedChannel: 'score',
+};
+
+export function storeReducer(state = a, action: Action): State {
+
+
+  console.log('*** STOREREDUCER ************', action, state);
+
   let newChannelData: ChannelData;
   let newScoreData: {[string]: ?number};
 
   let newSelectedChannel;
+
   switch (action.type) {
     case 'CONNECTED_WITH_SLACK':
       return {
@@ -75,3 +94,25 @@ export default function storeReducer(state: State, action: Action): State {
       return state;
   }
 }
+
+// export const slack = combineReducers ({
+//   storeReducer,
+// });
+
+const initialState = {
+  ids: [WIDGET_ID],
+  byId: {},
+};
+
+const widgets = (state = initialState, action) => ({
+  ...state,
+  byId: {
+    [WIDGET_ID]: storeReducer(state.byId[WIDGET_ID], action),
+  },
+})
+
+const rootReducer = combineReducers ({
+  widgets,
+});
+
+export default rootReducer;
