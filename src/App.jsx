@@ -90,7 +90,7 @@ export const mapStateToProps = (state: State, ownProps) => {
     selectedChannel,
     isConnectedWithSlack,
     // slackSession: state.slackSession,
-    // currentScore,
+    currentScore,
   };
 };
 
