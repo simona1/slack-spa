@@ -1,19 +1,19 @@
-import { Thunk } from 'redux-testkit';
+// import { Thunk } from 'redux-testkit';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as actions from '../Actions/index';
 
-import {
-  connectWithSlack,
-  processNewMessages,
-  processNewScores,
-  selectChannel,
-} from '../Actions/index';
+// import {
+//   connectWithSlack,
+//   processNewMessages,
+//   processNewScores,
+//   selectChannel,
+// } from '../Actions/index';
 
 
 describe('Actions', () => {
   it('should return an action object from connecting with Slack', () => {
-    const action = connectWithSlack();
+    const action = actions.connectWithSlack();
     expect(action).toEqual({
       type: 'CONNECTED_WITH_SLACK',
     });
@@ -72,7 +72,7 @@ describe('Actions', () => {
       messages: newMessageData,
       type: 'RECEIVED_NEW_MESSAGES',
     };
-    expect(processNewMessages(newMessageData)).toEqual(expectedAction);
+    expect(actions.processNewMessages(newMessageData)).toEqual(expectedAction);
   });
 
   it('should return an action object from processNewScores', () => {
@@ -83,7 +83,7 @@ describe('Actions', () => {
       scoreData: newScoreData,
       type: 'RECEIVED_NEW_SCORE',
     };
-    expect(processNewScores(newScoreData)).toEqual(expectedAction);
+    expect(actions.processNewScores(newScoreData)).toEqual(expectedAction);
   });
 
   it('should return an action object from selectChannel', () => {
@@ -92,6 +92,6 @@ describe('Actions', () => {
       channel,
       type: 'SELECT_CHANNEL',
     };
-    expect(selectChannel(channel)).toEqual(expectedAction);
+    expect(actions.selectChannel(channel)).toEqual(expectedAction);
   });
 });
