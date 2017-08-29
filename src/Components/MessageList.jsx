@@ -19,7 +19,6 @@ class MessageList extends React.Component {
   }
 
   render() {
-    {console.log('***');}
     const { selectedChannel } = this.props;
     let { messages } = this.props;
 

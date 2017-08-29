@@ -83,7 +83,6 @@ export class Toolbar extends React.Component {
 }
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  console.log('** Toolbar ownProps',state, ownProps);
   const id = ownProps.widgetId;
   const selectedChannel =
     state.widgets.byId[id].selectedChannel;

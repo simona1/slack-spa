@@ -2,28 +2,14 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import SLACK_API from './Utils/Api';
 import rootReducer from './Reducers/index';
 
 /* eslint-disable */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer,
-  {
-    isShowingScores: false,   // will need this later
-    isConnectedWithSlack: false,
-    channelData: {},
-    scoreData: {},
-    selectedChannel: null,
-  }, composeEnhancers(
-    applyMiddleware(thunkMiddleware),
+  composeEnhancers(
+    applyMiddleware(thunkMiddleware.withExtraArgument({ SLACK_API})),
   ));
-
-
-/* eslint-disable */
-store.subscribe(() => {
-  console.log('State: ', store.getState());
-});
-
-// TODO: remove
-window.store = store;
 
 export default store;

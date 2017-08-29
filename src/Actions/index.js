@@ -2,13 +2,11 @@
 
 import type { MessageType, Id } from '../FlowTypes/';
 
-
 export function connectWithSlack() {
   return {
     type: 'CONNECTED_WITH_SLACK',
   };
 }
-
 
 export function processNewMessages(newMessageData: {[string]: ?{[Id]: {[Id]: MessageType}}}) {
   return {
