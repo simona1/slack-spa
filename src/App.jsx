@@ -3,21 +3,21 @@
 /* eslint-disable */
 
 /* eslint-disable import/no-named-as-default */
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LoginView from './Components/LoginView';
 import MessageList from './Components/MessageList';
-import Toolbar from './Components/Toolbar';
-import type { State } from './FlowTypes/';
-import './App.css';
-import { WIDGET_ID } from './Constants/';
-
-const PropTypes = require('prop-types');
 import injectWidgetId from './Utils/utils';
+import Toolbar from './Components/Toolbar';
+import type { DefaultProps, OwnProps, State } from './FlowTypes/';
+import { WIDGET_ID } from './Constants/';
+import './App.css';
 
 
+class App extends Component<DefaultProps, OwnProps, State> {
+  state: State;
 
-class App extends Component {
   getChildContext() {
     return { widgetId: this.props.widgetId };
   }
@@ -30,8 +30,6 @@ class App extends Component {
 
   render() {
     const { isConnectedWithSlack, selectedChannel } = this.props;
-
-    console.log('^^^', isConnectedWithSlack);
 
     if (!isConnectedWithSlack) {
       return <LoginView />;
@@ -68,7 +66,7 @@ App.childContextTypes = {
   widgetId: PropTypes.string,
 }
 
-export const mapStateToProps = (state: State, ownProps) => {
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const id = ownProps.widgetId;
   console.log('$$$', state, ownProps);
   // let channelData = {'#redux': {}}

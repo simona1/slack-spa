@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { fetchMessagesForChannel } from '../Actions/index';
 import Message from './Message';
 import owl from '../images/avatars/owl.png';
-import type { Dispatch, State } from '../FlowTypes/';
+import type { Dispatch, OwnProps, State } from '../FlowTypes/';
 
 import injectWidgetId from '../Utils/utils';
 
@@ -57,7 +57,7 @@ class MessageList extends React.Component {
 
 export { MessageList };
 
-export const mapStateToProps = (state: State, ownProps) => {
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   let id = ownProps.widgetId;
   const messages = state.widgets.byId[id].channelData[state.widgets.byId[id].selectedChannel];
   return {
