@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import type { Action, ChannelData, State } from '../FlowTypes/';
 import { WIDGET_ID } from '../Constants/';
 
-const stateDefaults: State = {
+export const stateDefaults: State = {
   isShowingScores: false,   // will need this later
   isConnectedWithSlack: false,
   channelData: {},
@@ -11,7 +11,7 @@ const stateDefaults: State = {
   selectedChannel: null,
 };
 
-export function storeReducer(state:State = stateDefaults, action: Action): State {
+export function storeReducer(state: State = stateDefaults, action: Action): State {
   let newChannelData: ChannelData;
   let newScoreData: {[string]: ?number};
 

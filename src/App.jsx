@@ -68,10 +68,6 @@ App.childContextTypes = {
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const id = ownProps.widgetId;
-  console.log('$$$', state, ownProps);
-  // let channelData = {'#redux': {}}
-  // let selectedChannel = '#redux';
-  // let messages = {};
 
   const currentScore = state.widgets.byId[id].scoreData[state.widgets.byId[id].selectedChannel];
   const messages = state.widgets.byId[id].channelData[state.widgets.byId[id].selectedChannel];
