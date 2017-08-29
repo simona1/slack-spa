@@ -20,18 +20,18 @@ describe('Actions', () => {
   });
 
   // TODO: fix this test
-  xit('should return an action object from fetchChannels', function() {
+  xit('should return an action object from fetchChannels', () => {
     const channels = ['#random', '#general', '#dev'];
     const mockApiFetchChannels = jest.fn();
     mockApiFetchChannels.mockReturnValue(
-      Promise.resolve({channels})
+      Promise.resolve({ channels }),
     );
 
     const extraArgument = {
       Api: {
         fetchChannels: mockApiFetchChannels,
-      }
-    }
+      },
+    };
 
     const initialState = {
       isShowingScores: false,
@@ -42,22 +42,22 @@ describe('Actions', () => {
     };
 
     const expectedActions = [
-        {
-          type: 'RECEIVED_CHANNEL_LIST',
-          channels: ['#random', '#general', '#dev'],
-        }
-      ]
+      {
+        type: 'RECEIVED_CHANNEL_LIST',
+        channels: ['#random', '#general', '#dev'],
+      },
+    ];
 
-      const mockStore = configureStore([ thunk.withExtraArgument(extraArgument) ]);
-      const store = mockStore(initialState);
+    const mockStore = configureStore([thunk.withExtraArgument(extraArgument)]);
+    const store = mockStore(initialState);
 
-      return store.dispatch(actions.fetchChannels())
+    return store.dispatch(actions.fetchChannels())
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
         });
-    });
+  });
 
-  // TODO: add test for 'RECEIVED_MESSAGES_FOR_CHANNEL' action 
+  // TODO: add test for 'RECEIVED_MESSAGES_FOR_CHANNEL' action
 
   it('should return an action object from processNewMessages', () => {
     const newMessageData = {
