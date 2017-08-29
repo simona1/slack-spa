@@ -16,7 +16,7 @@ import smile from '../images/emojis/smile.jpg';
 import '../index.css';
 import type { ChannelData } from '../FlowTypes/';
 import injectWidgetId from '../Utils/utils';
-
+import type { Dispatch, OwnProps, State } from '../FlowTypes/';
 
 const sentiments =
   {
@@ -29,7 +29,6 @@ const sentiments =
 
 export class Toolbar extends React.Component {
   componentWillMount() {
-    console.log('&&&&&', this.props.channelData);
     const channels = Object.keys(this.props.channelData);
     if (channels.length === 0) {
       this.props.fetchChannels();
@@ -82,8 +81,8 @@ export class Toolbar extends React.Component {
   }
 }
 
-export const mapStateToProps = (state: State, ownProps) => {
-  console.log('*******TOOLBAR***',state, ownProps);
+export const mapStateToProps = (state: State, ownProps: OwnProps) => {
+  console.log('** Toolbar ownProps',state, ownProps);
   const id = ownProps.widgetId;
   const selectedChannel =
     state.widgets.byId[id].selectedChannel;
@@ -98,14 +97,7 @@ export const mapStateToProps = (state: State, ownProps) => {
   }
 };
 
-// ({
-//   id: ownProps.widgetId,
-//   selectedChannel: state.widgets.byId[id].selectedChannel,
-//   score: state.widgets.byId[id].scoreData[state.widgets.byId[id].selectedChannel],
-//   channelData: state.widgets.byId[id].channelData,
-// });
-
-export const mapDispatchToProps = dispatch =>
+export const mapDispatchToProps = (dispatch: Dispatch) =>
 bindActionCreators({
   selectChannel, fetchChannels,
 }, dispatch);
