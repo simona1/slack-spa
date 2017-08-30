@@ -12,16 +12,11 @@ function fetchRequest(path) {
 
 export default class SLACK_API {
 
-  static fetchChannels() {
-    return async function (dispatch: Dispatch) {
-      const response = await fetchRequest(`${PATH}channels`);
-      const channels = await response.json();
-      dispatch({
-        channels,
-        type: 'RECEIVED_CHANNEL_LIST',
-      });
-    };
-  }
+  static async fetchRequestChannels() {
+    const response = await fetchRequest(`${PATH}channels`);
+    const channels = await response.json();
+    return channels;
+  };
 
   static fetchMessagesForChannel(channel: string) {
     return async function (dispatch: Dispatch, getState: GetState) {
