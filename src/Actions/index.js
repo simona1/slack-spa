@@ -18,7 +18,9 @@ export function connectWithSlack() {
 
 export function fetchChannels() {
   return async function (dispatch: Dispatch) {
-    // TODO: This fetchRequest needs to be happening in SLACK_API file as a function named fetchChannels--or similar
+    // TODO: This fetchRequest needs to be happening in SLACK_API
+    // file as a function named fetchChannels--
+    // or similar
     const channels = await fetchRequest(`${PATH}channels`);
 
     dispatch({
@@ -33,7 +35,8 @@ export function fetchMessagesForChannel(channel: string) {
     const oldMessages = getState().widgets.byId[WIDGET_ID].channelData[channel];
 
     if (oldMessages) return;
-    // TODO: This fetchRequest needs to be happening in SLACK_API file as a function named fetchMessagesForChannel--or similar
+    // TODO: This fetchRequest needs to be happening in SLACK_API file as
+    // a function named fetchMessagesForChannel--or similar
     const messages = await fetchRequest(`${PATH}messages/${channel}`);
 
     dispatch({
