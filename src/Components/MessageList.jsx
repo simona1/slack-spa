@@ -5,11 +5,10 @@ import React from 'react';
 import { List } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import SLACK_API from '../Utils/Api';
+import { fetchMessagesForChannel} from '../Actions/';
 import Message from './Message';
 import owl from '../images/avatars/owl.png';
 import type { Dispatch, OwnProps, State } from '../FlowTypes/';
-
 import injectWidgetId from '../Utils/utils';
 
 class MessageList extends React.Component {
@@ -66,7 +65,6 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   };
 };
 
-const fetchMessagesForChannel = SLACK_API.fetchMessagesForChannel;
 export const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({ fetchMessagesForChannel }, dispatch);
 
