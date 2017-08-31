@@ -3,12 +3,12 @@ import { WIDGET_ID } from '../Constants/index';
 import type { MessageType, Id, Dispatch, GetState } from '../FlowTypes/';
 import SLACK_API from '../Utils/Api';
 // TODO: Needs to be an environmental variable
-const PATH = 'http://localhost:4000/';
+// const PATH = 'http://localhost:8001/';
 
 /* eslint func-names: ["error", "never"] */
-function fetchRequest(path) {
-  return fetch(path).then(response => response.json());
-}
+// function fetchRequest(path) {
+//   return fetch(path).then(response => response.json());
+// }
 
 export function connectWithSlack() {
   return {
@@ -28,8 +28,6 @@ export function fetchChannels() {
 }
 
 
-
-
 export function fetchMessagesForChannel(channel: string) {
   return async function (dispatch: Dispatch, getState: GetState) {
     const oldMessages = getState().widgets.byId[WIDGET_ID].channelData[channel];
@@ -37,7 +35,7 @@ export function fetchMessagesForChannel(channel: string) {
     if (oldMessages) {
       // TODO: This fetchRequest needs to be happening in SLACK_API file as
       // a function named fetchMessagesForChannel--or similar
-      //const messages = await fetchRequest(`${PATH}messages/${channel}`);
+      // const messages = await fetchRequest(`${PATH}messages/${channel}`);
       return;
     }
     dispatch({

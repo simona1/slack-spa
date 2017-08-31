@@ -23,16 +23,14 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
         ...state,
         isConnectedWithSlack: true,
       };
-
     case 'SELECT_CHANNEL':
       return {
         ...state,
         selectedChannel: action.channel,
       };
-
     case 'RECEIVED_CHANNEL_LIST':
       newChannelData = { ...state.channelData };
-      let channelNames = action.channels;
+      const channelNames = action.channels;
 
       channelNames.forEach((channel) => {
         newChannelData[channel] = newChannelData[channel] || null;
@@ -46,11 +44,6 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
         channelData: newChannelData,
         selectedChannel: newSelectedChannel,
       };
-
-
-
-
-
     case 'RECEIVED_MESSAGES_FOR_CHANNEL':
       newChannelData = { ...state.channelData };
 
@@ -60,19 +53,14 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
       action.messages.forEach((message) => {
         newChannelData[action.channel][message.id] = message;
       });
-
       // NOTE: Not currently as an object of objects...
       // Object.keys(action.messages).forEach((id) => {
       //   newChannelData[action.channel][id] = action.messages[id];
       // });
-
       return {
         ...state,
         channelData: newChannelData,
       };
-
-
-
     case 'RECEIVED_NEW_SCORE':
       newScoreData = { ...state.scoreData, ...action.scoreData };
       return {
@@ -85,7 +73,6 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
         ...state,
         isShowingScores: true,
       };
-
     case 'RECEIVED_NEW_MESSAGES':
       newChannelData = { ...state.channelData };
       Object.keys(action.messages).forEach((channelId) => {
