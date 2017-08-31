@@ -27,7 +27,6 @@ export function fetchChannels() {
   };
 }
 
-
 export function fetchMessagesForChannel(channel: string) {
   return async function (dispatch: Dispatch, getState: GetState) {
     const oldMessages = getState().widgets.byId[WIDGET_ID].channelData[channel];
@@ -45,14 +44,15 @@ export function fetchMessagesForChannel(channel: string) {
     });
   };
 }
-export function processNewMessages(newMessageData: {[string]: ?{[Id]: {[Id]: MessageType}}}) {
+
+export function processNewMessages(newMessageData: { [string]: ?{ [Id]: { [Id]: MessageType } } }) {
   return {
     messages: newMessageData,
     type: 'RECEIVED_NEW_MESSAGES',
   };
 }
 
-export function processNewScores(scoreData: {[string]: number}) {
+export function processNewScores(scoreData: { [string]: number }) {
   return {
     scoreData,
     type: 'RECEIVED_NEW_SCORE',

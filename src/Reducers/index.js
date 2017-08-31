@@ -4,7 +4,7 @@ import type { Action, ChannelData, State } from '../FlowTypes/';
 import { WIDGET_ID } from '../Constants/';
 
 export const stateDefaults: State = {
-  isShowingScores: false,   // will need this later
+  isShowingScores: false, // will need this later
   isConnectedWithSlack: false,
   channelData: {},
   scoreData: {},
@@ -13,7 +13,7 @@ export const stateDefaults: State = {
 
 export function storeReducer(state: State = stateDefaults, action: Action): State {
   let newChannelData: ChannelData;
-  let newScoreData: {[string]: ?number};
+  let newScoreData: { [string]: ?number };
 
   let newSelectedChannel;
 
@@ -35,7 +35,9 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
       channelNames.forEach((channel) => {
         newChannelData[channel] = newChannelData[channel] || null;
       });
+
       newSelectedChannel = state.selectedChannel;
+
       if (!newSelectedChannel) {
         newSelectedChannel = channelNames[0];
       }
@@ -53,6 +55,7 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
       action.messages.forEach((message) => {
         newChannelData[action.channel][message.id] = message;
       });
+
       // NOTE: Not currently as an object of objects...
       // Object.keys(action.messages).forEach((id) => {
       //   newChannelData[action.channel][id] = action.messages[id];

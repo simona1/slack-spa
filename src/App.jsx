@@ -53,7 +53,7 @@ App.propTypes = {
 
 App.defaultProps = {
   widgetId: WIDGET_ID,
-  isShowingScores: false,   // will need this later
+  isShowingScores: false, // will need this later
   isConnectedWithSlack: false,
   channelData: { 'redux': {} },
   scoreData: { 'score': 0.01 },
@@ -62,7 +62,7 @@ App.defaultProps = {
 
 App.childContextTypes = {
   widgetId: PropTypes.string,
-}
+};
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const id = ownProps.widgetId;

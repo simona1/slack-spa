@@ -41,7 +41,11 @@ describe('Actions', () => {
     const expectedActions = [
       {
         type: 'RECEIVED_CHANNEL_LIST',
+<<<<<<< HEAD
         channels: ['random', 'general', 'dev', 'justforfun'],
+=======
+        channels: ['random', 'general', 'dev'],
+>>>>>>> dev
       },
     ];
 
@@ -73,7 +77,7 @@ describe('Actions', () => {
 
   it('should return an action object from processNewScores', () => {
     const newScoreData = {
-      '#random': 0.2,
+      random: 0.2,
     };
     const expectedAction = {
       scoreData: newScoreData,

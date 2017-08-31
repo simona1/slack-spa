@@ -17,14 +17,14 @@ import '../index.css';
 import type { ChannelData } from '../FlowTypes/';
 import injectWidgetId from '../Utils/utils';
 import type { Dispatch, OwnProps, State } from '../FlowTypes/';
-const sentiments =
-  {
-    frustrated,
-    sad,
-    neutral,
-    smile,
-    happy,
-  };
+
+const sentiments = {
+  frustrated,
+  sad,
+  neutral,
+  smile,
+  happy,
+};
 
 export class Toolbar extends Component {
   componentWillMount() {
@@ -56,24 +56,20 @@ export class Toolbar extends Component {
         </Menu.Item>
         <Dropdown item text={selectedChannel || 'Select a channel'}>
           <Dropdown.Menu>
-            {Object.keys(channelData).map(
-              channel =>
-                (<Dropdown.Item
-                  key={channel}
-                  onClick={() => selectChannel(channel)}
-                  selected={channel === selectedChannel}
-                >
-                  {channel}
-                </Dropdown.Item>),
+            {Object.keys(channelData).map(channel =>
+              <Dropdown.Item
+                key={channel}
+                onClick={() => selectChannel(channel)}
+                selected={channel === selectedChannel}
+              >
+                {channel}
+              </Dropdown.Item>,
             )}
           </Dropdown.Menu>
         </Dropdown>
         <Menu.Menu position="right">
           <Menu.Item className="ui button">
-            <Image
-              avatar
-              src={sentiments[currentSentiment]}
-            />
+            <Image avatar src={sentiments[currentSentiment]} />
           </Menu.Item>
         </Menu.Menu>
       </Menu>
@@ -83,25 +79,24 @@ export class Toolbar extends Component {
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const id = ownProps.widgetId;
-  const selectedChannel =
-    state.widgets.byId[id].selectedChannel;
-  const score =
-    state.widgets.byId[id].scoreData[state.widgets.byId[id].selectedChannel];
+  const selectedChannel = state.widgets.byId[id].selectedChannel;
+  const score = state.widgets.byId[id].scoreData[selectedChannel];
   const channelData = state.widgets.byId[id].channelData;
 
   return {
     channelData,
     score,
     selectedChannel,
-  }
+  };
 };
 
 export const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({
-    selectChannel,
-    fetchChannels,
-  },
-  dispatch
-);
+  bindActionCreators(
+    {
+      selectChannel,
+      fetchChannels,
+    },
+    dispatch,
+  );
 
 export default injectWidgetId(connect(mapStateToProps, mapDispatchToProps)(Toolbar));
