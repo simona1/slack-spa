@@ -55,8 +55,8 @@ App.defaultProps = {
   widgetId: WIDGET_ID,
   isShowingScores: false, // will need this later
   isConnectedWithSlack: false,
-  channelData: { '#redux': {} },
-  scoreData: { score: 0.01 },
+  channelData: { 'redux': {} },
+  scoreData: { 'score': 0.01 },
   selectedChannel: null,
 };
 
