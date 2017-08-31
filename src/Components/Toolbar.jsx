@@ -1,7 +1,6 @@
 // @flow
-
 /* eslint-disable */
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
@@ -18,7 +17,6 @@ import '../index.css';
 import type { ChannelData } from '../FlowTypes/';
 import injectWidgetId from '../Utils/utils';
 import type { Dispatch, OwnProps, State } from '../FlowTypes/';
-
 const sentiments =
   {
     frustrated,
@@ -28,7 +26,7 @@ const sentiments =
     happy,
   };
 
-export class Toolbar extends React.Component {
+export class Toolbar extends Component {
   componentWillMount() {
     const channels = Object.keys(this.props.channelData);
     if (channels.length === 0) {
@@ -45,6 +43,7 @@ export class Toolbar extends React.Component {
   };
 
   render() {
+    // TODO: Sentiment analysis needs to be added; work is being done on the API side to add routes to get sentiment scores into/out of the DB
     const { score, selectedChannel, channelData, selectChannel } = this.props;
     const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
     const computedColor = convertScoreToColorAndEmoji(score).color;
@@ -97,10 +96,12 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   }
 };
 
-// const fetchChannels = SLACK_API.fetchChannels;
 export const mapDispatchToProps = (dispatch: Dispatch) =>
-bindActionCreators({
-  selectChannel, fetchChannels,
-}, dispatch);
+  bindActionCreators({
+    selectChannel,
+    fetchChannels,
+  },
+  dispatch
+);
 
 export default injectWidgetId(connect(mapStateToProps, mapDispatchToProps)(Toolbar));
