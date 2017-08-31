@@ -6,9 +6,10 @@ import type { Store } from 'redux';
 import { processNewScores, processNewMessages } from '../Actions/index';
 import store from '../store';
 
-const socket = openSocket('http://localhost:4000');
-// const socket = openSocket('https://databraid.localtunnel.me');
+// TODO: This endpoint needs to be an environemntal variable
+//const socket = openSocket('https://databraid.localtunnel.me');
 
+const socket = openSocket('http://localhost:4000');
 
 // TODO: needs to be refactored to remove reference to the store.
 // Invoke it int the root app under componentWillMount() and use connect
