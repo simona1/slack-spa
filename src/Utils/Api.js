@@ -1,6 +1,9 @@
 // @flow
 
+// TODO: Needs to be moved to environmental variables file
 // const PATH = 'https://databraid.localtunnel.me';
+
+// TODO: remove when no longer needed
 const PATH = 'http://localhost:4000/';
 
 /* eslint func-names: ["error", "never"] */
@@ -21,5 +24,4 @@ export default class SLACK_API {
     const messages = await response.json();
     return messages;
   }
-
 }

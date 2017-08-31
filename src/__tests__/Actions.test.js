@@ -41,11 +41,7 @@ describe('Actions', () => {
     const expectedActions = [
       {
         type: 'RECEIVED_CHANNEL_LIST',
-<<<<<<< HEAD
         channels: ['random', 'general', 'dev', 'justforfun'],
-=======
-        channels: ['random', 'general', 'dev'],
->>>>>>> dev
       },
     ];
 

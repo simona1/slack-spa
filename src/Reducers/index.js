@@ -28,10 +28,9 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
         ...state,
         selectedChannel: action.channel,
       };
-    case 'RECEIVED_CHANNEL_LIST':
+    case 'RECEIVED_CHANNEL_LIST': {
       newChannelData = { ...state.channelData };
       const channelNames = action.channels;
-
       channelNames.forEach((channel) => {
         newChannelData[channel] = newChannelData[channel] || null;
       });
@@ -46,16 +45,15 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
         channelData: newChannelData,
         selectedChannel: newSelectedChannel,
       };
+    }
     case 'RECEIVED_MESSAGES_FOR_CHANNEL':
       newChannelData = { ...state.channelData };
-
       newChannelData[action.channel] = { ...newChannelData[action.channel] };
 
       // NOTE: Messages for a channel come back as an array of objects
       action.messages.forEach((message) => {
         newChannelData[action.channel][message.id] = message;
       });
-
       // NOTE: Not currently as an object of objects...
       // Object.keys(action.messages).forEach((id) => {
       //   newChannelData[action.channel][id] = action.messages[id];
@@ -84,12 +82,10 @@ export function storeReducer(state: State = stateDefaults, action: Action): Stat
           newChannelData[channelId][messageId] = action.messages[channelId][messageId];
         });
       });
-
       return {
         ...state,
         channelData: newChannelData,
       };
-
     default:
       return state;
   }
