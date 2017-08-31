@@ -1,6 +1,6 @@
 // @flow
 import { WIDGET_ID } from '../Constants/index';
-import type { MessageType, Id, Dispatch, GetState } from '../FlowTypes/';
+import type { MessageType, Id, Dispatch, GetState, SlackApi } from '../FlowTypes/';
 // TODO: Needs to be an environmental variable
 // const PATH = 'http://localhost:8001/';
 
@@ -17,7 +17,7 @@ export function connectWithSlack() {
 }
 
 export function fetchChannels() {
-  return async (dispatch: Dispatch, getState: GetState, { SLACK_API }) => {
+  return async (dispatch: Dispatch, getState: GetState, { SLACK_API }: SlackApi) => {
     // TODO: remove after testing with the Slack API
     // const response = await fetchRequest(`${PATH}channels`);
     const channels = await SLACK_API.fetchRequestChannels();
@@ -29,7 +29,7 @@ export function fetchChannels() {
 }
 
 export function fetchMessagesForChannel(channel: string) {
-  return async (dispatch: Dispatch, getState: GetState, { SLACK_API }) => {
+  return async (dispatch: Dispatch, getState: GetState, { SLACK_API }: SlackApi) => {
     const oldMessages = getState().widgets.byId[WIDGET_ID].channelData[channel];
     const messages = await SLACK_API.fetchRequestMessagesForChannel();
     if (oldMessages) {
