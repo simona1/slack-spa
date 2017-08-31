@@ -12,7 +12,7 @@ import type { Dispatch, OwnProps, State } from '../FlowTypes/';
 
 import injectWidgetId from '../Utils/utils';
 
-class MessageList extends React.Component {
+export class MessageList extends React.Component {
   props: {
     selectedChannel: ?string,
     messages: {},
@@ -34,22 +34,6 @@ class MessageList extends React.Component {
     // TODO: Specific user info needs to be added to Message: user_name, first_name, last_Name, avatar_img, status_emoji, etc.
     // TODO: Specific message info needs to be added to Message: text, timestamp
     // NOTE: The above TODOs will come from the store and fetched from DB routes that have not been fully built out in the API
-//     const { selectedChannel } = this.props;
-//     let { messages } = this.props;
-//
-// // TODO: remove this code - will fetch messages through sockets
-//     if (!messages) {
-//       if (selectedChannel) {
-//         setTimeout(
-//           () => fetchMessagesForChannel(selectedChannel),
-//           0,
-//         );
-//       }
-//       messages = {};
-//     }
-//
-//     const messageIds = Object.keys(messages);
-
     return (
       <List celled>
         {messageIds.map((msgId) => {
@@ -68,8 +52,6 @@ class MessageList extends React.Component {
     );
   }
 }
-
-export { MessageList };
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   let id = ownProps.widgetId;
