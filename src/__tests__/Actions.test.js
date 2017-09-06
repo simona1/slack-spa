@@ -1,14 +1,6 @@
-// import { Thunk } from 'redux-testkit';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as actions from '../Actions/index';
-
-// import {
-//   connectWithSlack,
-//   processNewMessages,
-//   processNewScores,
-//   selectChannel,
-// } from '../Actions/index';
 
 describe('Actions', () => {
   it('should return an action object from connecting with Slack', () => {
@@ -18,21 +10,34 @@ describe('Actions', () => {
     });
   });
 
-  // TODO: fix this test
-  xit('should return an action object from fetchChannels', () => {
-    const channels = ['random', 'general', 'dev'];
+  it('return an action object from fetchChannels', () => {
     const mockApiFetchChannels = jest.fn();
-    mockApiFetchChannels.mockReturnValue(Promise.resolve({ channels }));
+    mockApiFetchChannels.mockReturnValue(
+      Promise.resolve([
+        {
+          channelId: 'C6DUVSW3A',
+          channelName: 'dev',
+        },
+        {
+          channelId: 'C6E2XMK4H',
+          channelName: 'general',
+        },
+        {
+          channelId: 'C6E2XMLAV',
+          channelName: 'random',
+        },
+      ]),
+    );
 
     const extraArgument = {
-      Api: {
-        fetchChannels: mockApiFetchChannels,
+      SLACK_API: {
+        fetchRequestChannels: mockApiFetchChannels,
       },
     };
 
     const initialState = {
       isShowingScores: false,
-      isConnectedWithSlack: false,
+      isConnectedWithSlack: true,
       channelData: {},
       scoreData: {},
       selectedChannel: null,
@@ -40,21 +45,140 @@ describe('Actions', () => {
 
     const expectedActions = [
       {
+        channels: [
+          {
+            channelId: 'C6DUVSW3A',
+            channelName: 'dev',
+          },
+          {
+            channelId: 'C6E2XMK4H',
+            channelName: 'general',
+          },
+          {
+            channelId: 'C6E2XMLAV',
+            channelName: 'random',
+          },
+        ],
         type: 'RECEIVED_CHANNEL_LIST',
-        channels: ['random', 'general', 'dev', 'justforfun'],
       },
     ];
 
     const mockStore = configureStore([thunk.withExtraArgument(extraArgument)]);
     const store = mockStore(initialState);
 
-    return store.dispatch(actions.fetchChannels())
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-      });
+    return store.dispatch(actions.fetchChannels()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
-  // TODO: add test for 'RECEIVED_MESSAGES_FOR_CHANNEL' action
+  it('return an action object from fetchMessagesForChannel', () => {
+    const mockApiFetchMessagesForChannel = jest.fn();
+    mockApiFetchMessagesForChannel.mockReturnValue(
+      Promise.resolve([
+        {
+          dev: {
+            3: {
+              messageId: 3,
+              avatarImage:
+                'https://secure.gravatar.com/avatar/bffb6bb05942ed7400905f9ceb0f6cdf.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0011-24.png',
+              name: 'Tyler Langenbrunner',
+              userName: 'tylerlangenbrunner',
+              text: 'Happy things! Look at this message. It is sooooo cool.',
+              timestamp: '2017-08-01T22:20:43.643Z',
+              rawTimestamp: '1501626043.643661',
+              channelName: 'dev',
+              statusEmoji: ':slack:',
+            },
+          },
+        },
+      ]),
+    );
+
+    const extraArgument = {
+      SLACK_API: {
+        fetchRequestMessagesForChannel: mockApiFetchMessagesForChannel,
+      },
+    };
+
+    const initialState = {
+      isShowingScores: false,
+      isConnectedWithSlack: true,
+      channelData: {},
+      scoreData: {},
+      selectedChannel: null,
+    };
+
+    const expectedActions = [
+      {
+        channel: 'dev',
+        messages: [
+          {
+            dev: {
+              3: {
+                messageId: 3,
+                avatarImage:
+                  'https://secure.gravatar.com/avatar/bffb6bb05942ed7400905f9ceb0f6cdf.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2F66f9%2Fimg%2Favatars%2Fava_0011-24.png',
+                name: 'Tyler Langenbrunner',
+                userName: 'tylerlangenbrunner',
+                text: 'Happy things! Look at this message. It is sooooo cool.',
+                timestamp: '2017-08-01T22:20:43.643Z',
+                rawTimestamp: '1501626043.643661',
+                channelName: 'dev',
+                statusEmoji: ':slack:',
+              },
+            },
+          },
+        ],
+        type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
+      },
+    ];
+
+    const mockStore = configureStore([thunk.withExtraArgument(extraArgument)]);
+    const store = mockStore(initialState);
+
+    return store.dispatch(actions.fetchMessagesForChannel('dev')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('return an action object from fetchScoreForChannel', () => {
+    const mockApiFetchScoreForChannel = jest.fn();
+    mockApiFetchScoreForChannel.mockReturnValue(
+      Promise.resolve([
+        {
+          dev: '0.02',
+        },
+      ]),
+    );
+
+    const extraArgument = {
+      SLACK_API: {
+        fetchRequestScoreForChannel: mockApiFetchScoreForChannel,
+      },
+    };
+
+    const initialState = {
+      isShowingScores: false,
+      isConnectedWithSlack: true,
+      channelData: {},
+      scoreData: {},
+      selectedChannel: null,
+    };
+
+    const expectedActions = [
+      {
+        scoreData: [{ dev: '0.02' }],
+        type: 'RECEIVED_SCORE_FOR_CHANNEL',
+      },
+    ];
+
+    const mockStore = configureStore([thunk.withExtraArgument(extraArgument)]);
+    const store = mockStore(initialState);
+
+    return store.dispatch(actions.fetchScoreForChannel('dev')).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 
   it('should return an action object from processNewMessages', () => {
     const newMessageData = {

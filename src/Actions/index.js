@@ -22,15 +22,23 @@ export function fetchChannels() {
 
 export function fetchMessagesForChannel(channel: string) {
   return async (dispatch: Dispatch, getState: GetState, { SLACK_API }: SlackApi) => {
-    const oldMessages = getState().widgets.byId[WIDGET_ID].channelData[channel];
-    if (oldMessages) return;
-
     const messages = await SLACK_API.fetchRequestMessagesForChannel(channel);
 
     dispatch({
       channel,
       messages,
       type: 'RECEIVED_MESSAGES_FOR_CHANNEL',
+    });
+  };
+}
+
+export function fetchScoreForChannel(channel: string) {
+  return async (dispatch: Dispatch, getState: GetState, { SLACK_API }: SlackApi) => {
+    const scoreData = await SLACK_API.fetchRequestScoreForChannel(channel);
+
+    dispatch({
+      scoreData,
+      type: 'RECEIVED_SCORE_FOR_CHANNEL',
     });
   };
 }
