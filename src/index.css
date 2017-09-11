@@ -17,3 +17,12 @@ body {
 .connectButton {
   padding-bottom: 50px;
 }
+
+.message-author {
+  font-size: 11px;
+}
+
+.message-timestamp {
+  font-size: 11px;
+  font-weight: normal;
+}
