@@ -3,6 +3,7 @@
 import React from 'react';
 import { Image, List } from 'semantic-ui-react';
 import type { MessageType } from '../FlowTypes/';
+const moment = require('moment');
 
 /*
 NOTE: Properties available for each message:
@@ -23,8 +24,11 @@ export default function Message({ avatarImage, name, text, timestamp }: MessageT
       <Image avatar src={avatarImage} />
       <List.Content>
         <List.Header>
-          {name} {timestamp}
-          <List.Description>{text}</List.Description>
+          <span className="message-author">{name}</span>
+          <span className="message-timestamp">
+            {'\t' + moment(timestamp).format('LLLL')}
+          </span>
+          <List.Description className="message-text">{text}</List.Description>
         </List.Header>
       </List.Content>
     </List.Item>
