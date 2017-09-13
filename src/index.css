@@ -26,3 +26,10 @@ body {
   font-size: 11px;
   font-weight: normal;
 }
+
+.scrolling {
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}

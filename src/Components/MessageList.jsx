@@ -47,7 +47,7 @@ NOTE: Properties available for each message:
 */
 
     return (
-      <List celled size={sizes[2]}>
+      <List celled size={sizes[2]} className="scrolling">
         {messageIds.map(msgId => {
           const { avatarImage, name, text, timestamp } = messages[msgId];
           return (
