@@ -4,6 +4,8 @@ export type Action = {
 
 export type Id = mixed;
 
+export type Env = {[string]: ?string};
+
 export type MessageType = {
   avatarImage: string,
   name: string,
@@ -41,6 +43,7 @@ export type DefaultProps = {
   scoreData: {[string]: ?number},
   selectedChannel: ?string,
 };
+
 
 export type SlackApi = {
   method(): Promise<mixed>,

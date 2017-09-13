@@ -3,11 +3,14 @@
 import React from 'react';
 import { Image, List } from 'semantic-ui-react';
 import type { MessageType } from '../FlowTypes/';
+
 const moment = require('moment');
 
 /*
 NOTE: Properties available for each message:
-- messageId* (integer): Primary key from database table. *Only a property of messages retrieved fmor the database, not on messages emitted via Socket.io
+- messageId* (integer): Primary key from database; Property
+  of messages retrieved from the database, not on messages
+  emitted via Socket.io
 - avatarImage (string): Image size 24
 - name (string): "Real name", e.g. 'Kurtis Houser'
 - userName (string): "User name", e.g. 'thekurtishouser' or other
@@ -26,7 +29,7 @@ export default function Message({ avatarImage, name, text, timestamp }: MessageT
         <List.Header>
           <span className="message-author">{name}</span>
           <span className="message-timestamp">
-            {'\t' + moment(timestamp).format('LLLL')}
+            {`\t${moment(timestamp).format('LLLL')}`}
           </span>
           <List.Description className="message-text">{text}</List.Description>
         </List.Header>

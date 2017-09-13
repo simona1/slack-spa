@@ -12,10 +12,19 @@ exports[`Renders message with default props should render a message when given p
   />
   <ListContent>
     <ListHeader>
-      John Appleseed
-       
-      3:50 PM, 08-02-2017
-      <ListDescription>
+      <span
+        className="message-author"
+      >
+        John Appleseed
+      </span>
+      <span
+        className="message-timestamp"
+      >
+        	Tuesday, August 1, 2017 3:20 PM
+      </span>
+      <ListDescription
+        className="message-text"
+      >
         Hello there
       </ListDescription>
     </ListHeader>
