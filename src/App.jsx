@@ -19,20 +19,22 @@ import './App.css';
 
 class App extends React.Component<DefaultProps, OwnProps, State> {
   state: State;
+  socket: Object;
+
 
   componentWillMount() {
-    let socket = io.connect(process.env.REACT_APP_SLACK_API_URL);
-    socket.on('messages', messages => {
+    this.socket = io.connect(process.env.REACT_APP_SLACK_API_URL);
+    this.socket.on('messages', messages => {
       this.props.processNewMessages(messages);
     });
 
-    socket.on('score', scoreData => {
+    this.socket.on('score', scoreData => {
       this.props.processNewScores(scoreData);
     });
   }
 
   componentWillUnmount() {
-    let socket = io.disconnect();
+    this.socket.disconnect();
     //console.dir('Disconnecting Socket as component will unmount');
   }
 

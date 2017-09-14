@@ -3,10 +3,15 @@ import toJson from 'enzyme-to-json';
 import React from 'react';
 import { MessageList } from '../Components/MessageList';
 
-// TODO: fix this test
-xdescribe('Renders message list with default props', () => {
+describe('Renders message list with default props', () => {
   it('should render a message list when given props', () => {
-    const messageList = shallow(<MessageList selectedChannel="dev" />);
+    const fetchMessagesForChannel = jest.fn();
+    const messageList = shallow(
+      <MessageList
+        selectedChannel="dev"
+        fetchMessagesForChannel={fetchMessagesForChannel}
+      />,
+    );
     expect(toJson(messageList)).toMatchSnapshot();
   });
 });

@@ -10,7 +10,7 @@ describe('Actions', () => {
     });
   });
 
-  it('return an action object from fetchChannels', () => {
+  it('should return an action object from fetchChannels', () => {
     const mockApiFetchChannels = jest.fn();
     mockApiFetchChannels.mockReturnValue(
       Promise.resolve([

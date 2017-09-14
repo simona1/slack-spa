@@ -1,12 +1,13 @@
+
+import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import React from 'react';
-import { Toolbar } from '../Components/Toolbar';
+import Toolbar from '../Components/Toolbar';
 
-// TODO: fix this test
-xdescribe('Renders toolbar with default props', () => {
+
+describe('Toolbar test', () => {
   it('should render', () => {
-    const toolbar = shallow(<Toolbar />);
-    expect(toJson(toolbar)).toMatchSnapshot();
+    const component = shallow(<Toolbar />);
+    expect(toJson(component)).toMatchSnapshot();
   });
 });
