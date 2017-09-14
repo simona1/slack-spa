@@ -1,18 +1,17 @@
 // @flow
 
 /* eslint-disable */
-
-/* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
-import { processNewMessages, processNewScores } from './Actions/index';
+import { processNewMessages, processNewScores, fetchScoreForChannel } from './Actions/index';
 import LoginView from './Components/LoginView';
 import MessageList from './Components/MessageList';
 import injectWidgetId from './Utils/utils';
 import Toolbar from './Components/Toolbar';
+import convertScoreToColorAndEmoji from './Utils/';
 import type { DefaultProps, Dispatch, OwnProps, State } from './FlowTypes/';
 import { WIDGET_ID } from './Constants/';
 import './App.css';
@@ -43,6 +42,8 @@ class App extends React.Component<DefaultProps, OwnProps, State> {
   }
 
   props: {
+    score: mixed,
+    fetchScoreForChannel: PropTypes.func,
     processNewMessages: PropTypes.func,
     processNewScores: PropTypes.func,
     isConnectedWithSlack: boolean,
@@ -50,8 +51,11 @@ class App extends React.Component<DefaultProps, OwnProps, State> {
     widgetId: string,
   };
 
+
   render() {
-    const { isConnectedWithSlack, selectedChannel } = this.props;
+    const { score, isConnectedWithSlack, fetchScoreForChannel, selectedChannel } = this.props;
+    const computedColor = convertScoreToColorAndEmoji(score).color;
+    const sentiment = `${computedColor}`;
 
     if (!isConnectedWithSlack) {
       return <LoginView />;
@@ -62,7 +66,7 @@ class App extends React.Component<DefaultProps, OwnProps, State> {
         <div>
           <Toolbar />
         </div>
-        <div className="listColor">
+        <div className={sentiment}>
           <MessageList selectedChannel={selectedChannel} />
         </div>
       </div>
@@ -79,7 +83,7 @@ App.defaultProps = {
   isShowingScores: false, // will need this later
   isConnectedWithSlack: false,
   channelData: { redux: {} },
-  scoreData: { score: 0.01 },
+  scoreData: { score: null },
   selectedChannel: null,
 };
 
@@ -89,13 +93,11 @@ App.childContextTypes = {
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => {
   const id = ownProps.widgetId;
-
-  const currentScore = state.widgets.byId[id].scoreData[state.widgets.byId[id].selectedChannel];
   const messages = state.widgets.byId[id].channelData[state.widgets.byId[id].selectedChannel];
 
   const isConnectedWithSlack = state.widgets.byId[id].isConnectedWithSlack;
   const selectedChannel = state.widgets.byId[id].selectedChannel;
-  const score = state.widgets.byId[id].score;
+  const score = state.widgets.byId[id].scoreData[selectedChannel];
   const isShowingScores = state.widgets.byId[id].isShowingScores;
 
   return {
@@ -105,13 +107,13 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => {
     selectedChannel,
     isConnectedWithSlack,
     // slackSession: state.slackSession,
-    currentScore,
   };
 };
 
 export const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
+      fetchScoreForChannel,
       processNewMessages,
       processNewScores,
     },
