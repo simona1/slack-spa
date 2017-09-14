@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
 import { processNewMessages, processNewScores, fetchScoreForChannel } from './Actions/index';
-
 import LoginView from './Components/LoginView';
 import MessageList from './Components/MessageList';
 import injectWidgetId from './Utils/utils';
