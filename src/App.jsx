@@ -55,15 +55,7 @@ class App extends React.Component<DefaultProps, OwnProps, State> {
 
   render() {
     const { score, isConnectedWithSlack, fetchScoreForChannel, selectedChannel } = this.props;
-
-    // if (!score) {
-    //   if (selectedChannel) {
-    //     fetchScoreForChannel(selectedChannel);
-    //   }
-    // }
-
     const computedColor = convertScoreToColorAndEmoji(score).color;
-    console.log(computedColor)
     const sentiment = `${computedColor}`;
 
     if (!isConnectedWithSlack) {
