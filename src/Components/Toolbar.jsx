@@ -54,6 +54,7 @@ export class Toolbar extends Component {
     const currentSentiment = convertScoreToColorAndEmoji(score).emoji;
     const computedColor = convertScoreToColorAndEmoji(score).color;
     const menuClasses = `ui ${computedColor} inverted menu`;
+    console.log('toolbar color', computedColor)
 
     return (
       <Menu size="small" className={menuClasses}>
