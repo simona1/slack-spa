@@ -5,37 +5,37 @@
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
 import { processNewMessages, processNewScores } from './Actions/index';
-
 import LoginView from './Components/LoginView';
 import MessageList from './Components/MessageList';
 import injectWidgetId from './Utils/utils';
 import Toolbar from './Components/Toolbar';
-import type { DefaultProps, OwnProps, State } from './FlowTypes/';
+import type { DefaultProps, Dispatch, OwnProps, State } from './FlowTypes/';
 import { WIDGET_ID } from './Constants/';
 import './App.css';
 
-class App extends Component<DefaultProps, OwnProps, State> {
+class App extends React.Component<DefaultProps, OwnProps, State> {
   state: State;
+  socket: Object;
+
 
   componentWillMount() {
-    const socket = io.connect(process.env.REACT_APP_SLACK_API_URL);
-    socket.on('messages', messages => {
+    this.socket = io.connect(process.env.REACT_APP_SLACK_API_URL);
+    this.socket.on('messages', messages => {
       this.props.processNewMessages(messages);
     });
 
-    socket.on('score', scoreData => {
+    this.socket.on('score', scoreData => {
       this.props.processNewScores(scoreData);
     });
   }
 
   componentWillUnmount() {
-    socket.disconnect();
-    console.dir('Disconnecting Socket as component will unmount');
+    this.socket.disconnect();
+    //console.dir('Disconnecting Socket as component will unmount');
   }
 
   getChildContext() {
@@ -43,8 +43,8 @@ class App extends Component<DefaultProps, OwnProps, State> {
   }
 
   props: {
-    processNewMessages: mixed,
-    processNewScores: mixed,
+    processNewMessages: PropTypes.func,
+    processNewScores: PropTypes.func,
     isConnectedWithSlack: boolean,
     selectedChannel: mixed,
     widgetId: string,

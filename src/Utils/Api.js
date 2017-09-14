@@ -1,10 +1,11 @@
 // @flow
+import type { Env } from '../FlowTypes/';
 
-const PATH = process.env.REACT_APP_SLACK_API_URL;
+const PATH : Env = process.env.REACT_APP_SLACK_API_URL;
 
 /* eslint func-names: ["error", "never"] */
 
-function fetchRequest(path) {
+function fetchRequest(path: string) {
   return fetch(path)
     .then(response => response.json())
     .catch(err => err);
@@ -12,7 +13,6 @@ function fetchRequest(path) {
 
 export default class SLACK_API {
   static async fetchRequestChannels() {
-    console.log('channels fetch', `with the ${PATH}`);
     const channels = await fetchRequest(`${PATH}/channels`);
     return channels;
   }

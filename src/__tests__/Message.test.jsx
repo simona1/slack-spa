@@ -10,7 +10,7 @@ describe('Renders message with default props', () => {
         avatarImage="img.png"
         name="John Appleseed"
         text="Hello there"
-        timestamp="3:50 PM, 08-02-2017"
+        timestamp="2017-08-01T22:20:43.643Z"
       />,
     );
     expect(toJson(message)).toMatchSnapshot();
