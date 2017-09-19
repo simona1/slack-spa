@@ -9,7 +9,7 @@ describe('Renders message with default props', () => {
       <Message
         avatarImage="img.png"
         name="John Appleseed"
-        text="Hello there"
+        text="Hello again"
         timestamp="2017-08-01T22:20:43.643Z"
       />,
     );

@@ -25,7 +25,7 @@ exports[`Renders message with default props should render a message when given p
       <ListDescription
         className="message-text"
       >
-        Hello there
+        Hello again
       </ListDescription>
     </ListHeader>
   </ListContent>
