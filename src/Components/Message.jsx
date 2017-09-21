@@ -19,10 +19,3 @@ export default function Message({ avatarImage, name, text, timestamp }: MessageT
     </List.Item>
   );
 }
-
-
-/*
-<span className="message-timestamp">
-  {`\t${moment.utc(timestamp).format('LLLL')}`}
-</span>
-*/

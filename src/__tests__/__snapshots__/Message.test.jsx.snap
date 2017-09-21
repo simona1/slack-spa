@@ -18,7 +18,7 @@ exports[`Renders message with default props should render a message when given p
         John Appleseed
       </span>
       <TimeStamp
-        timestamp="2017-08-01T22:20:43.643Z"
+        timestamp=""
       />
       <ListDescription
         className="message-text"
