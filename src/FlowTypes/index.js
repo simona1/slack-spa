@@ -13,6 +13,10 @@ export type MessageType = {
   timestamp: string,
 };
 
+export type TimeStampType ={
+  timestamp: string,
+}
+
 export type ChannelData = {[string]: ?{[Id]: {[Id]: MessageType}}};
 
 export type State = {

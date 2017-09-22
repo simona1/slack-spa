@@ -17,11 +17,9 @@ exports[`Renders message with default props should render a message when given p
       >
         John Appleseed
       </span>
-      <span
-        className="message-timestamp"
-      >
-        	Invalid date
-      </span>
+      <TimeStamp
+        timestamp=""
+      />
       <ListDescription
         className="message-text"
       >
