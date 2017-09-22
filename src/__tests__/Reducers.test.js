@@ -35,6 +35,14 @@ describe('storeReducer', () => {
       .toReturnState({ ...initialState, isConnectedWithSlack: true });
   });
 
+  it('should change boolean for slack connection to false', () => {
+    const action = { type: 'DISCONNECTED_FROM_SLACK' };
+    Reducer(storeReducer)
+      .withState(initialState)
+      .expect(action)
+      .toReturnState({ ...initialState, isConnectedWithSlack: false });
+  });
+
   it('should store selected channel', () => {
     const existingState = { ...initialState, selectedChannel: 1 };
     const action = { type: 'SELECT_CHANNEL', channel: 2 };
@@ -76,7 +84,7 @@ describe('storeReducer', () => {
         selectedChannel: 'dev',
       });
   });
-  
+
   it('should store new messages for a channel', () => {
     const action = {
       channel: 'dev',

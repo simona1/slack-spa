@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
-import { selectChannel, fetchChannels, fetchScoreForChannel } from '../Actions/index';
+import { selectChannel, fetchChannels, fetchScoreForChannel, disconnectFromSlack } from '../Actions/index';
 import convertScoreToColorAndEmoji from '../Utils/';
 import frustrated from '../images/emojis/frustrated.jpg';
 import happy from '../images/emojis/happy.jpg';
@@ -40,10 +40,11 @@ export class Toolbar extends Component {
     selectChannel: mixed,
     selectedChannel: mixed,
     fetchScoreForChannel: Function,
+    disconnectFromSlack: Function,
   };
 
   render() {
-    const { score, selectedChannel, channelData, selectChannel, fetchScoreForChannel } = this.props;
+    const { score, selectedChannel, channelData, selectChannel, fetchScoreForChannel, disconnectFromSlack } = this.props;
 
     if (!score) {
       if (selectedChannel) {
@@ -73,6 +74,12 @@ export class Toolbar extends Component {
             ))}
           </Dropdown.Menu>
         </Dropdown>
+        <Menu.Item
+          className="ui button"
+          onClick={() => disconnectFromSlack()}
+        >
+          logout
+        </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item className="ui button">
             <Image avatar src={sentiments[currentSentiment]} />
@@ -102,6 +109,7 @@ export const mapDispatchToProps = (dispatch: Dispatch) =>
       selectChannel,
       fetchChannels,
       fetchScoreForChannel,
+      disconnectFromSlack,
     },
     dispatch,
   );
