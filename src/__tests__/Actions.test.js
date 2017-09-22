@@ -10,6 +10,13 @@ describe('Actions', () => {
     });
   });
 
+  it('should return an action object from disconnecting from Slack', () => {
+    const action = actions.disconnectFromSlack();
+    expect(action).toEqual({
+      type: 'DISCONNECTED_FROM_SLACK',
+    });
+  });
+
   it('should return an action object from fetchChannels', () => {
     const mockApiFetchChannels = jest.fn();
     mockApiFetchChannels.mockReturnValue(

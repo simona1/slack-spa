@@ -11,6 +11,13 @@ export function connectWithSlack() {
   };
 }
 
+export function disconnectFromSlack() {
+  return {
+    type: 'DISCONNECTED_FROM_SLACK',
+  };
+}
+
+
 export function fetchChannels() {
   return async (dispatch: Dispatch, getState: GetState, { SLACK_API }: SlackApi) => {
     const channels = await SLACK_API.fetchRequestChannels();
